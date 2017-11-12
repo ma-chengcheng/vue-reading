@@ -11,13 +11,14 @@
         <hr/>
         <div v-for="(tags, subject) in filterTags">
           <mu-sub-header class="subject-title"><b>{{subject}}</b></mu-sub-header>
-            <mu-row>
-              <mu-col v-for="(tagState, tagName) in tags" width="25" tablet="25" desktop="25">
-                <mu-chip @click="selectFilter(subject, tagName)" v-bind:class="[tagState?'r-tag-selected':'r-tag-disselected']">
-                  {{tagName}}
-                </mu-chip>
-              </mu-col>
-            </mu-row>
+          <mu-row>
+            <mu-col v-for="(tagState, tagName) in tags" width="25" tablet="25" desktop="25">
+              <mu-chip @click="selectFilter(subject, tagName)" v-bind:class="[tagState?'r-tag-selected':'r-tag-disselected']">
+                {{tagName}}
+              </mu-chip>
+            </mu-col>
+          </mu-row>
+          <mu-divider/>
         </div>
 
         <div id="r-bottom-drawer">
@@ -26,10 +27,11 @@
         </div>
       </mu-drawer>
     </mu-bottom-nav>
+    <mu-divider/>
 
     <mu-list>
-        <mu-list-item v-for="bookItem in bookList">
-          <mu-row gutter>
+        <mu-list-item to="/" v-for="bookItem in bookList">
+          <mu-row gutter class="r-row">
             <mu-col width="30" tablet="30" desktop="30">
               <mu-card>
                 <mu-card-media>
@@ -53,6 +55,7 @@
               </mu-content-block>
             </mu-col>
           </mu-row>
+          <mu-divider/>
         </mu-list-item>
     </mu-list>
     <mu-infinite-scroll :scroller="scroller" :loading="loading" @load="loadMore" loadingText="猫猫为您加载中"/>
@@ -206,6 +209,9 @@ export default {
 </script>
 
 <style scoped>
+.r-row{
+  margin-bottom: 15px;
+}
 
   #head-title{
     color: #000000;
@@ -235,6 +241,7 @@ export default {
   .head_book-type{
     float: right;
     color: rgba(0,0,0,.54);
+    border: 1px solid #ddd;
   }
 
   #r-bottom-drawer{

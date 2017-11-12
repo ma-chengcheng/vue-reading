@@ -11,33 +11,42 @@
         <!-- 点击榜 -->
         <div v-if="activeTab === 'click'">
           <mu-list>
-            <mu-list-item v-for="(book_click_item, index) in book_click_list" v-bind:title="book_click_item.bookName">
-              <mu-avatar v-if="index < 3" slot="left" color="#ffffff" backgroundColor="#45494d" size="30">{{index + 1}}</mu-avatar>
-              <mu-avatar v-else slot="left" color="#ffffff" size="30">{{index + 1}}</mu-avatar>
-              <mu-icon slot="right" value="chevron_right"/>
-            </mu-list-item>
+            <div v-for="(book_click_item, index) in book_click_list" >
+              <mu-list-item v-bind:title="book_click_item.bookName">
+                <mu-avatar v-if="index < 3" slot="left" color="#ffffff" backgroundColor="#45494d" size="30">{{index + 1}}</mu-avatar>
+                <mu-avatar v-else slot="left" color="#ffffff" size="30">{{index + 1}}</mu-avatar>
+                <mu-icon slot="right" value="chevron_right"/>
+              </mu-list-item>
+              <mu-divider/>
+            </div>
           </mu-list>
         </div>
 
         <!-- 订阅榜 -->
         <div v-if="activeTab === 'subscribe'">
           <mu-list>
-            <mu-list-item v-for="(book_subscribe_itme, index) in book_subscribe_list" v-bind:title="book_subscribe_itme.bookName">
-              <mu-avatar v-if="index < 3" slot="left" color="#ffffff" backgroundColor="#45494d" size="30">{{index + 1}}</mu-avatar>
-              <mu-avatar v-else slot="left" color="#ffffff" size="30">{{index + 1}}</mu-avatar>
-              <mu-icon slot="right" value="chevron_right"/>
-            </mu-list-item>
+            <div v-for="(book_subscribe_itme, index) in book_subscribe_list">
+              <mu-list-item v-bind:title="book_subscribe_itme.bookName">
+                <mu-avatar v-if="index < 3" slot="left" color="#ffffff" backgroundColor="#45494d" size="30">{{index + 1}}</mu-avatar>
+                <mu-avatar v-else slot="left" color="#ffffff" size="30">{{index + 1}}</mu-avatar>
+                <mu-icon slot="right" value="chevron_right"/>
+              </mu-list-item>
+              <mu-divider/>
+            </div>
           </mu-list>
         </div>
 
         <!-- 追书榜 -->
         <div v-if="activeTab === 'run'">
           <mu-list>
-            <mu-list-item v-for="(book_run_item, index) in book_run_list" v-bind:title="book_run_item.bookName">
-              <mu-avatar v-if="index < 3" slot="left" color="#ffffff" backgroundColor="#45494d" size="30">{{index + 1}}</mu-avatar>
-              <mu-avatar v-else slot="left" color="#ffffff" size="30">{{index + 1}}</mu-avatar>
-              <mu-icon slot="right" value="chevron_right"/>
-            </mu-list-item>
+            <div v-for="(book_run_item, index) in book_run_list">
+              <mu-list-item　v-bind:title="book_run_item.bookName">
+                <mu-avatar v-if="index < 3" slot="left" color="#ffffff" backgroundColor="#45494d" size="30">{{index + 1}}</mu-avatar>
+                <mu-avatar v-else slot="left" color="#ffffff" size="30">{{index + 1}}</mu-avatar>
+                <mu-icon slot="right" value="chevron_right"/>
+              </mu-list-item>
+              <mu-divider/>
+            </div>
           </mu-list>
         </div>
 

@@ -33,11 +33,14 @@
           </mu-list-item>
 
           <!-- 板块书籍列表 -->
-          <mu-list-item v-for="book_item in book_list" v-bind:title="book_item.bookName">
-            <mu-chip class="book-type"　slot="left">
-              {{book_item.type}}
-            </mu-chip>
-          </mu-list-item>
+          <div  v-for="book_item in book_list">
+            <mu-divider/>
+            <mu-list-item v-bind:title="book_item.bookName">
+              <mu-chip class="book-type"　slot="left">
+                {{book_item.type}}
+              </mu-chip>
+            </mu-list-item>
+          </div>
         </mu-list>
       </mobile-tear-sheet>
     </mu-card>
@@ -79,4 +82,5 @@ export default {
   float: right;
   color: rgba(0,0,0,.54);
 }
+
 </style>
