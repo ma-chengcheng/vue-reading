@@ -2,7 +2,7 @@
   <div id="home-page">
     <!-- 搜索 -->
     <div id="search">
-      <mu-auto-complete fullWidth="true" hintText="搜索你想看的书籍～" icon="search"　@input="handleInput" :dataSource="dataSource" @change="handlechange" />
+      <mu-text-field fullWidth="true" hintText="搜索你想看的书籍～" icon="search"/>
     </div>
 
     <!-- 搜索下方的热推 -->
@@ -54,7 +54,7 @@ export default {
 }
 
 #search{
-  width: 80%;
+  padding-right: 16px;
 }
 
 .card-column{
