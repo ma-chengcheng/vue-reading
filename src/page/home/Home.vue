@@ -1,0 +1,64 @@
+<template>
+  <div id="home-page">
+    <!-- 搜索 -->
+    <div id="search">
+      <mu-auto-complete fullWidth="true" hintText="搜索你想看的书籍～" icon="search"　@input="handleInput" :dataSource="dataSource" @change="handlechange" />
+    </div>
+
+    <!-- 搜索下方的热推 -->
+    <RecommendImg/>
+
+    <!-- 热门推荐 -->
+    <HotBook class="card-column"/>
+
+    <!-- 免费书籍 -->
+    <FreeBook class="card-column"/>
+
+    <!-- 精品书籍 -->
+    <QualityBook class="card-column"/>
+
+    <!-- 热门书籍 -->
+    <NewBook class="card-column"/>
+
+    <!-- 排行榜 -->
+    <Rank class="card-column"/>
+  </div>
+</template>
+
+<script>
+import FreeBook from '@/components/home/FreeBook'
+import NewBook from '@/components/home/NewBook'
+import HotBook from '@/components/home/HotBook'
+import QualityBook from '@/components/home/QualityBook'
+import RecommendImg from '@/components/home/RecommendImg'
+import Rank from '@/components/home/Rank'
+
+
+
+export default {
+  name: 'Home',
+  components: {
+    RecommendImg,
+    HotBook,
+    QualityBook,
+    NewBook,
+    FreeBook,
+    Rank
+  }
+}
+</script>
+
+<style scoped>
+#home-page{
+  width: 100%;
+}
+
+#search{
+  width: 80%;
+}
+
+.card-column{
+  margin-top: 20px;
+}
+
+</style>
