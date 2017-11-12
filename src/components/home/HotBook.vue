@@ -5,6 +5,7 @@
         <mu-list>
           <!-- 板块第一个书籍 -->
           <mu-sub-header id="title">热门书籍</mu-sub-header>
+          <mu-divider/>          
           <mu-list-item>
             <mu-row gutter>
               <mu-col width="30" tablet="30" desktop="30">
@@ -82,5 +83,6 @@ export default {
 .head_book-type{
   float: right;
   color: rgba(0,0,0,.54);
+  border: 1px solid #ddd;
 }
 </style>
