@@ -1,5 +1,6 @@
 <template>
   <div>
+    <ReadHeader/>
     <mu-bottom-nav :value="bottomNav"  @change="handleChange">
       <mu-bottom-nav-item value="people" title="人气" icon="favorite"/>
       <mu-bottom-nav-item value="favorites" title="时间" icon="restore"/>
@@ -30,7 +31,7 @@
     <mu-divider/>
 
     <mu-list>
-        <mu-list-item to="/" v-for="bookItem in bookList">
+        <mu-list-item　v-for="bookItem in bookList" to="/BookDetail/">
           <mu-row gutter class="r-row">
             <mu-col width="30" tablet="30" desktop="30">
               <mu-card>
@@ -63,8 +64,13 @@
 </template>
 
 <script>
+import ReadHeader from '@/components/header/Header'
+
 export default {
   name: 'Library',
+  components: {
+    ReadHeader,
+  },
   data () {
     const bookList = [];
 

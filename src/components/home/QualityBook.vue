@@ -6,7 +6,7 @@
           <!-- 板块第一个书籍 -->
           <mu-sub-header id="title">精品书籍</mu-sub-header>
           <mu-divider/>
-          <mu-list-item>
+          <mu-list-item to="/BookDetail/">
             <mu-row gutter>
               <mu-col width="30" tablet="30" desktop="30">
                 <mu-card>
@@ -36,7 +36,7 @@
           <!-- 板块书籍列表 -->
           <div  v-for="book_item in book_list">
             <mu-divider/>
-            <mu-list-item v-bind:title="book_item.bookName">
+            <mu-list-item v-bind:title="book_item.bookName" to="/BookDetail/">
               <mu-chip class="book-type"　slot="left">
                 {{book_item.type}}
               </mu-chip>

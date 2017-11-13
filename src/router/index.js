@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/page/home/Home'
 import Rank from '@/page/rank/Rank'
 import Library from '@/page/library/Library'
+import BookDetail from '@/page/BookDetail/BookDetail'
 
 
 Vue.use(Router)
@@ -24,6 +25,11 @@ export default new Router({
       path: '/library',
       name: 'library',
       component: Library
+    },
+    {
+      path: '/BookDetail',
+      name: 'BookDetail',
+      component: BookDetail
     },
     // {
     //   path: '/recharge/',
