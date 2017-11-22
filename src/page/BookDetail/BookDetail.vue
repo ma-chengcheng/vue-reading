@@ -29,7 +29,7 @@
       </mu-col>
     </mu-row>
     <br/>
-    <mu-raised-button class="r-bottom-button"　label="开始阅读" secondary/>
+    <mu-raised-button class="r-bottom-button"　label="开始阅读" primary/>
     <mu-flat-button class="r-bottom-button" label="追书"/>
     <mu-flat-button class="r-bottom-button" label="自动订阅"/>
   </mu-content-block>

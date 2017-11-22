@@ -1,9 +1,9 @@
 <template>
   <div>
     <div id="r-logo">
-      <div id="r-account-icon">
+      <router-link to="Login"><div id="r-account-icon">
         <mu-icon value="account_circle" :size="35"/>
-      </div>
+      </div></router-link>
     </div>
     <mu-tabs @change="handleTabChange">
         <mu-tab value="home" title="首页"/>
