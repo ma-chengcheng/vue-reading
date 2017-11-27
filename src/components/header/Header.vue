@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="r-logo">
-      <router-link to="Login"><div id="r-account-icon">
+      <router-link to="UserCenter"><div id="r-account-icon">
         <mu-icon value="account_circle" :size="35"/>
       </div></router-link>
     </div>

@@ -9,8 +9,10 @@ import axios from 'axios'
 Vue.config.productionTip = false
 
 window.axios = axios;
-axios.defaults.baseURL = 'http://www.3roo.cn';
-axios.defaults.autofaceURL = 'http://www.3roo.cn';
+axios.defaults.baseURL = 'http://api.beluga.ai/';
+axios.defaults.autofaceURL = 'http://api.beluga.ai/';
+axios.defaults.withCredentials=true;
+
 
 /* eslint-disable no-new */
 new Vue({

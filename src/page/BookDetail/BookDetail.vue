@@ -87,6 +87,9 @@
         捧场
       </mu-sub-header>
       <mu-list-item>
+        <mu-text-field label="数量" fullWidth="true" labelFloat/><br/>
+      </mu-list-item>
+      <mu-list-item>
         <mu-radio label="猫球　100猫币/个" name="group" nativeValue="simple1" v-model="value"/>
         <mu-avatar src="../static/images//donate/1.png" slot="rightAvatar"/>
       </mu-list-item>
@@ -111,9 +114,6 @@
         <mu-avatar src="../static/images//donate/6.png" slot="rightAvatar"/>
       </mu-list-item>
       <mu-list-item>
-        <mu-text-field label="数量" fullWidth="true" labelFloat/><br/>
-      </mu-list-item>
-      <mu-list-item>
         <mu-raised-button @click="closeBottomSheet"  class="demo-raised-button" label="打赏" fullWidth="true" secondary/>
       </mu-list-item>
     </mu-list>
@@ -122,7 +122,7 @@
 
   <!-- 评论 -->
   <mu-list>
-      <mu-list-item title="书友评论" @click="openBottomCommentSheet">
+      <mu-list-item title="书友评论" @click="openCommentDialog">
         <mu-icon slot="right" value="create"/>
       </mu-list-item>
       <mu-divider/>
@@ -151,7 +151,7 @@
          </mu-list-item>
        <mu-divider inset/>
   </mu-list>
-  <mu-bottom-sheet :open="bottomCommentSheet" @close="closeBottomCommentSheet">
+  <!-- <mu-bottom-sheet sheetClass="r-comment-sheet" :open="bottomCommentSheet" @close="closeBottomCommentSheet">
     <mu-list>
       <mu-list-item>
         <mu-text-field fullWidth="true"　label="评论 :" multiLine :rows="4" :rowsMax="4" maxLength="20" labelFloat/><br/>
@@ -160,7 +160,19 @@
         <mu-raised-button @click="closeBottomCommentSheet"  class="demo-raised-button" label="评论" fullWidth="true" secondary/>
       </mu-list-item>
     </mu-list>
-  </mu-bottom-sheet>
+  </mu-bottom-sheet> -->
+  <mu-dialog :open="dialogComment" @close="closeCommentDialog">
+    <mu-list>
+      <mu-list-item>
+        <mu-text-field fullWidth="true"　label="评论 :" multiLine :rows="4" :rowsMax="4" maxLength="20" labelFloat/><br/>
+      </mu-list-item>
+      <mu-list-item>
+        <mu-raised-button @click="closeCommentDialog"  class="demo-raised-button" label="评论" fullWidth="true" secondary/>
+      </mu-list-item>
+    </mu-list>
+    <!-- <mu-flat-button slot="actions" @click="close" primary label="取消"/>
+    <mu-flat-button slot="actions" primary @click="close" label="确定"/> -->
+  </mu-dialog>
   <mu-divider/>
   <ReadFooter/>
   </div>
@@ -176,22 +188,29 @@ export default {
   },
   data () {
     return {
+      dialogComment: false,
       bottomSheet: false,
       bottomCommentSheet: false
     }
   },
   methods: {
     closeBottomSheet () {
-      this.bottomSheet = false
+      this.bottomSheet = false;
     },
     openBottomSheet () {
-      this.bottomSheet = true
+      this.bottomSheet = true;
     },
     closeBottomCommentSheet () {
-      this.bottomCommentSheet = false
+      this.bottomCommentSheet = false;
     },
     openBottomCommentSheet () {
-      this.bottomCommentSheet = true
+      this.bottomCommentSheet = true;
+    },
+    openCommentDialog () {
+      this.dialogComment = true;
+    },
+    closeCommentDialog () {
+      this.dialogComment = false;
     },
     goBack () {
       this.$router.go(-1);
@@ -221,5 +240,10 @@ export default {
 
 .r-donate-flexbox{
 text-align: center;
+}
+
+.r-comment-sheet{
+  position: fixed;
+  top: 0px;
 }
 </style>
