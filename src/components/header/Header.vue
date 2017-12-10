@@ -1,9 +1,13 @@
 <template>
   <div>
     <div id="r-logo">
-      <router-link to="UserCenter"><div id="r-account-icon">
-        <mu-icon value="account_circle" :size="35"/>
-      </div></router-link>
+      <router-link to="user">
+          <div id="r-account-icon">
+              <mu-icon value="search" size='30'/>
+              &nbsp
+              <mu-icon value="account_circle" size='30'/>
+          </div>
+      </router-link>
     </div>
     <mu-tabs @change="handleTabChange">
         <mu-tab value="home" title="首页"/>

@@ -1,17 +1,17 @@
 <template>
   <div id="recommend-img">
-    <mu-paper class="recommend-img-paper" :zDepth="2">
+    <mu-paper class="recommend-img-paper">
 
       <mu-flexbox>
         <mu-flexbox-item v-for="card in card_group">
-          <mu-paper :zDepth="2">
+          <mu-paper>
             <mu-card>
               <mu-card-media>
-                <img v-bind:src="'http://www.3roo.cn/static/coverImg/'+card.coverImg" />
+                <img v-bind:src="coverBaseUrl + card.cover" />
               </mu-card-media>
             </mu-card>
             <div class="book-name">
-              <span>{{card.bookName}}</span>
+              <span>{{card.book_name}}</span>
             </div>
           </mu-paper>
         </mu-flexbox-item>
@@ -21,20 +21,22 @@
 </template>
 
 <script>
+import {coverBaseUrl} from '@/config/env'
 export default {
   name: 'RecommendImg',
   data(){
     return {
-      card_group: {}
+        coverBaseUrl,
+        card_group: {}
     }
   },
   created: function() {
-    axios.get('/ShowImgViewAPI/')
+    axios.get('/api/IndexAdBookViewAPI/')
     .then(res => {
         if (res.status === 200) {
             console.log('ok');
-            this.card_group = res.data.showImg;
-            console.log(this.card_group);
+            this.card_group = res.data.ad_book;
+            console.log(this.ad_book);
         }
       }
     )

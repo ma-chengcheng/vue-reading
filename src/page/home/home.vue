@@ -1,11 +1,11 @@
 <template>
   <div>
-    <ReadHeader/>
+    <head-bar head_index='true'></head-bar>
     <div id="home-page">
       <!-- 搜索 -->
-      <div id="search">
+      <!-- <div id="search">
         <mu-text-field fullWidth="true" hintText="搜索你想看的书籍～" icon="search"/>
-      </div>
+      </div> -->
 
       <!-- 搜索下方的热推 -->
       <RecommendImg/>
@@ -25,7 +25,7 @@
       <!-- 排行榜 -->
       <Rank class="card-column"/>
     </div>
-    <ReadFooter/>    
+    <ReadFooter/>
   </div>
 </template>
 
@@ -36,7 +36,7 @@ import HotBook from '@/components/home/HotBook'
 import QualityBook from '@/components/home/QualityBook'
 import RecommendImg from '@/components/home/RecommendImg'
 import Rank from '@/components/home/Rank'
-import ReadHeader from '@/components/header/Header'
+import headBar from '@/components/header/headBar'
 import ReadFooter from '@/components/footer/Footer'
 
 
@@ -50,7 +50,7 @@ export default {
     NewBook,
     FreeBook,
     Rank,
-    ReadHeader,
+    headBar,
     ReadFooter
   }
 }
@@ -61,9 +61,9 @@ export default {
   width: 100%;
 }
 
-#search{
+/*#search{
   padding-right: 16px;
-}
+}*/
 
 .card-column{
   margin-top: 20px;

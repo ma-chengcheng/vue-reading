@@ -1,10 +1,10 @@
 <template>
   <div>
-    <mu-appbar title="修仙神探">
+    <mu-appbar title="修仙神探" style="position: fixed;">
       <mu-icon-button icon="chevron_left" slot="left" @click="goBack"/>
     </mu-appbar>
     <mu-content-block>
-    <mu-row gutter>
+    <mu-row gutter style="margin-top: 70px;">
       <mu-col width="30" tablet="30" desktop="25">
         <mu-card>
           <mu-card-media>
@@ -17,21 +17,18 @@
         <mu-content-block>
           　当历史变成传说当传说变成神话当神话
         </mu-content-block>
+
         <mu-content-block>
           <div class="head_book_bottom">
-            <mu-icon value="person" :size="15"/>
-            <span>帅的无可救药</span>
-            <div class="head_book-type">
+            <mu-flat-button label="帅的无可救药" icon="person" class="demo-flat-button" disabled style="height: 15px; font-size: 12px;"/>
+            <span class="head_book-type">
               仙剑
-            </div>
+            </span>
         </div>
         </mu-content-block>
       </mu-col>
     </mu-row>
     <br/>
-    <mu-raised-button class="r-bottom-button"　label="开始阅读" primary/>
-    <mu-flat-button class="r-bottom-button" label="追书"/>
-    <mu-flat-button class="r-bottom-button" label="自动订阅"/>
   </mu-content-block>
   <mu-divider/>
   <mu-list>
@@ -174,7 +171,12 @@
     <mu-flat-button slot="actions" primary @click="close" label="确定"/> -->
   </mu-dialog>
   <mu-divider/>
-  <ReadFooter/>
+  <div style="position: fixed; bottom: 0px;background-color: #ffffff; width: 100%;">
+        <mu-flat-button label="追书" style="width: 32%; height: 45px;"/>
+        <mu-raised-button　label="开始阅读" style="width: 32%; height: 50px;" primary/>
+        <mu-flat-button label="自动订阅" style="width: 32%; height: 45px;"/>
+
+  </div>
   </div>
 </template>
 
@@ -182,7 +184,7 @@
 import ReadFooter from '@/components/footer/Footer'
 
 export default {
-  name: 'BookDetail',
+  name: 'book',
   components: {
     ReadFooter
   },

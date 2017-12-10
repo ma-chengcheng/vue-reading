@@ -1,64 +1,101 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/page/home/Home'
-import Rank from '@/page/rank/Rank'
-import Library from '@/page/library/Library'
-import BookDetail from '@/page/BookDetail/BookDetail'
-import Login from '@/page/User/Login'
-import Register from '@/page/User/Register'
-import ResetPassword from '@/page/User/ResetPassword'
-import UserCenter from '@/page/User/UserCenter'
+import App from '../App'
+import Home from '@/page/home/home'
+import rank from '@/page/rank/rank'
+import library from '@/page/library/library'
+import book from '@/page/book/book'
 
+
+import user from '@/page/user/user'
+import profile from '@/page/user/children/profile'
+import setUserName from '@/page/user/children/children/setUserName'
+import setPhone from '@/page/user/children/children/setPhone'
+import setUserDescribe from '@/page/user/children/children/setUserDescribe'
+import bookFollow from '@/page/user/children/bookFollow'
+import bookHistory from '@/page/user/children/bookHistory'
+
+
+import login from '@/page/account/login'
+import register from '@/page/account/register'
+import forget from '@/page/account/forget'
 
 Vue.use(Router)
+const routes = [
+  {
+    path: '/',
+    component: App,
+    children: [
+      {
+        path: '',
+        redirect: '/index'
+      },
+      {
+        path: '/index',
+        component: Home
+      },
+      {
+        path: '/rank',
+        component: rank
+      },
+      {
+        path: '/library',
+        component: library
+      },
+      {
+        path: '/login',
+        component: login
+      },
+      {
+        path: '/register',
+        component: register
+      },
+      {
+        path: '/forget',
+        component: forget
+      },
+      {
+        path: '/user',
+        component: user,
+        children: [
+          {
+            path: 'bookFollow',
+            component: bookFollow
+          },
+          {
+            path: 'bookHistory',
+            component: bookHistory
+          },
+          {
+            path: 'profile',
+            component: profile,
+            children: [
+              {
+                path: 'username',
+                component: setUserName
+              },
+              {
+                path: 'phone',
+                component: setPhone
+              },
+              {
+                path: 'userDescribe',
+                component: setUserDescribe
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    path: '/book',
+    component: book
+  },
+]
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'Home',
-      component: Home
-    },
-
-    {
-      path: '/rank',
-      name: 'rank',
-      component: Rank
-    },
-    {
-      path: '/library',
-      name: 'library',
-      component: Library
-    },
-    {
-      path: '/BookDetail',
-      name: 'BookDetail',
-      component: BookDetail
-    },
-    {
-      path: '/Login',
-      name: 'Login',
-      component: Login
-    },
-    {
-      path: '/Register',
-      name: 'Register',
-      component: Register
-    },
-    {
-      path: '/ResetPassword',
-      name: 'ResetPassword',
-      component: ResetPassword
-    },
-    {
-      path: '/UserCenter',
-      name: 'UserCenter',
-      component: UserCenter
-    },
-    // {
-    //   path: '/recharge/',
-    //   name: 'library',
-    //   component: library
-    // }
-  ]
+  mode: 'history',
+  routes
 })

@@ -4,19 +4,19 @@
       <mobile-tear-sheet>
         <mu-list>
           <!-- 板块第一个书籍 -->
-          <mu-sub-header id="title">热门书籍</mu-sub-header>
+          <mu-sub-header id="title">{{module_title}}</mu-sub-header>
           <mu-divider/>
-          <mu-list-item to="/BookDetail/">
+          <mu-list-item to="/book/">
             <mu-row gutter>
-              <mu-col width="30" tablet="30" desktop="30">
+              <mu-col width="30" tablet="30" desktop="25">
                 <mu-card>
                   <mu-card-media>
-                    <img v-bind:src="'http://www.3roo.cn/static/coverImg/'+head_book.coverImg" />
+                    <img :src="coverBaseUrl + head_book.cover" />
                   </mu-card-media>
                 </mu-card>
               </mu-col>
               <mu-col width="70" tablet="70" desktop="70">
-                <mu-sub-header>{{head_book.bookName}}</mu-sub-header>
+                <mu-sub-header>{{head_book.book_name}}</mu-sub-header>
                 <mu-content-block>
                   　{{head_book.describe}}
                 </mu-content-block>
@@ -36,7 +36,7 @@
           <!-- 板块书籍列表 -->
           <div  v-for="book_item in book_list">
             <mu-divider/>
-            <mu-list-item v-bind:title="book_item.bookName" to="/BookDetail/">
+            <mu-list-item v-bind:title="book_item.book_name" to="/book/">
               <mu-chip class="book-type"　slot="left">
                 {{book_item.type}}
               </mu-chip>
@@ -49,22 +49,25 @@
 </template>
 
 <script>
+import {coverBaseUrl} from '@/config/env'
 export default {
-  name: 'ＨotBook',
-  data(){
-    return {
-      head_book: {},
-      book_list: {}
-    }
-  },
-  created: function () {
-    axios.get('/HotRecommendViewAPI/')
-    .then(res => {
-        if (res.status === 200) {
-            this.head_book = res.data.head_book;
-            this.book_list = res.data.book_list;
+    name: 'HotBook',
+    data(){
+        return {
+            coverBaseUrl,
+            module_title: '热书推荐',
+            head_book: {},
+            book_list: {}
         }
-      }
+    },
+    created: function () {
+        axios.get('/api/IndexModuleViewAPI/')
+        .then(res => {
+            if (res.status === 200) {
+                this.head_book = res.data.top_book;
+                this.book_list = res.data.book_items;
+            }
+        }
     )
   }
 }
@@ -75,7 +78,6 @@ export default {
   height: 40%;
 }
 
-
 .head_book_bottom{
   font-size: 12px;
 }
@@ -85,4 +87,5 @@ export default {
   color: rgba(0,0,0,.54);
   border: 1px solid #ddd;
 }
+
 </style>

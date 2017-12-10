@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page">
     <mu-content-block>
       <br/>
       <div id="r-logoin-logo">
@@ -14,31 +14,42 @@
       <br/>
       <mu-raised-button　@click="login" label="登录" fullWidth primary/>
       <div style="margin-top: 14px;">
-        <router-link to="ResetPassword/">忘记密码</router-link>
-        <div id="r-register"><router-link to="Register/">注册账号</router-link></div>
+        <router-link to="forget/">忘记密码</router-link>
+        <div id="r-register"><router-link to="register/">注册账号</router-link></div>
       </div>
     </mu-content-block>
   </div>
 </template>
 
 <script>
+import {accountLogin} from '../../../src/service/getData'
+import {mapState, mapMutations} from 'vuex'
+
 export default {
-  name: 'Login',
+  name: 'login',
   data(){
     return{
       phone: "",
       password: "",
       inputPhoneErrorText: "",
-      inputPasswordErrorText: ""
+      inputPasswordErrorText: "",
+
     }
   },
   computed: {
       //判断手机号码
       checkPhone: function(){
           return /^1\d{10}$/gi.test(this.phone)
-      }
+      },
+      ...mapState([
+          'user_profile',
+          'user_is_active'
+      ]),
   },
   methods: {
+    ...mapMutations([
+      'RECORD_USERINFO',
+    ]),
     goBack () {
       this.$router.go(-1);
     },
@@ -51,20 +62,14 @@ export default {
     },
     login () {
       if (this.checkPhone) {
-          axios.get('/UserLoginAPIView/',{
-            params: {
-              phone: this.phone,
-              password: this.password
-            }
-          })
-          .then(res => {
-            if ('true' == res.data.state) {
-              this.$router.push('/UserCenter')
-            }else{
-              this.inputPasswordErrorText = "密码错误或用户不存在"
-            }
+        const login = accountLogin(this.phone, this.password).then(res => {
+          if ('true' == res.data.state) {
+            this.RECORD_USERINFO(res.data.user_profile)
+            this.$router.push('/')
+          }else{
+            this.inputPasswordErrorText = "密码错误或用户不存在"
           }
-        )
+        })
       }
     }
   }
@@ -72,6 +77,15 @@ export default {
 </script>
 
 <style scoped>
+.page{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 203;
+  background-color: #fff;
+}
 
 #r-register{
   float: right;

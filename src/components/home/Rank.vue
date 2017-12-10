@@ -12,9 +12,9 @@
         <div v-if="activeTab === 'click'">
           <mu-list>
             <div v-for="(book_click_item, index) in book_click_list" >
-              <mu-list-item v-bind:title="book_click_item.bookName" to="/BookDetail/">
-                <mu-avatar v-if="index < 3" slot="left" color="#ffffff" backgroundColor="#45494d" size="30">{{index + 1}}</mu-avatar>
-                <mu-avatar v-else slot="left" color="#ffffff" size="30">{{index + 1}}</mu-avatar>
+              <mu-list-item v-bind:title="book_click_item.book_name" to="/BookDetail/">
+                <mu-avatar v-if="index < 3" slot="left" color="#ffffff" backgroundColor="#45494d" size='30'>{{index + 1}}</mu-avatar>
+                <mu-avatar v-else slot="left" color="#ffffff" size='30'>{{index + 1}}</mu-avatar>
                 <mu-icon slot="right" value="chevron_right"/>
               </mu-list-item>
               <mu-divider/>
@@ -26,9 +26,9 @@
         <div v-if="activeTab === 'subscribe'">
           <mu-list>
             <div v-for="(book_subscribe_itme, index) in book_subscribe_list">
-              <mu-list-item v-bind:title="book_subscribe_itme.bookName" to="/BookDetail/">
-                <mu-avatar v-if="index < 3" slot="left" color="#ffffff" backgroundColor="#45494d" size="30">{{index + 1}}</mu-avatar>
-                <mu-avatar v-else slot="left" color="#ffffff" size="30">{{index + 1}}</mu-avatar>
+              <mu-list-item v-bind:title="book_subscribe_itme.book_name" to="/BookDetail/">
+                <mu-avatar v-if="index < 3" slot="left" color="#ffffff" backgroundColor="#45494d" size='30'>{{index + 1}}</mu-avatar>
+                <mu-avatar v-else slot="left" color="#ffffff" size='30'>{{index + 1}}</mu-avatar>
                 <mu-icon slot="right" value="chevron_right"/>
               </mu-list-item>
               <mu-divider/>
@@ -40,9 +40,9 @@
         <div v-if="activeTab === 'run'">
           <mu-list>
             <div v-for="(book_run_item, index) in book_run_list">
-              <mu-list-item　v-bind:title="book_run_item.bookName" to="/BookDetail/">
-                <mu-avatar v-if="index < 3" slot="left" color="#ffffff" backgroundColor="#45494d" size="30">{{index + 1}}</mu-avatar>
-                <mu-avatar v-else slot="left" color="#ffffff" size="30">{{index + 1}}</mu-avatar>
+              <mu-list-item　v-bind:title="book_run_item.book_name" to="/BookDetail/">
+                <mu-avatar v-if="index < 3" slot="left" color="#ffffff" backgroundColor="#45494d" size='30'>{{index + 1}}</mu-avatar>
+                <mu-avatar v-else slot="left" color="#ffffff" size='30'>{{index + 1}}</mu-avatar>
                 <mu-icon slot="right" value="chevron_right"/>
               </mu-list-item>
               <mu-divider/>
@@ -67,12 +67,12 @@ export default {
     }
   },
   created: function () {
-    axios.get('/RankListViewAPI/')
+    axios.get('/api/RankListViewAPI/')
     .then(res => {
         if (res.status === 200) {
-            this.book_run_list = res.data.listRun;
-            this.book_click_list = res.data.listClick;
-            this.book_subscribe_list = res.data.listPay;
+            this.book_run_list = res.data.run_rank;
+            this.book_click_list = res.data.click_rank;
+            this.book_subscribe_list = res.data.pay_rank;
         }
       }
     )

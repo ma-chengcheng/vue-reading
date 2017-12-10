@@ -1,6 +1,7 @@
 <template>
   <div>
-    <ReadHeader/>
+    <!-- <ReadHeader/> -->
+    <head-bar head_index='true'></head-bar>
     <mu-bottom-nav :value="bottomNav"  @change="handleChange">
       <mu-bottom-nav-item value="people" title="人气" icon="favorite"/>
       <mu-bottom-nav-item value="favorites" title="时间" icon="restore"/>
@@ -31,19 +32,20 @@
     <mu-divider/>
 
     <mu-list>
+        <!-- <mu-list-item　v-for="bookItem in bookList" to="/BookDetail/"> -->
         <mu-list-item　v-for="bookItem in bookList" to="/BookDetail/">
           <mu-row gutter class="r-row">
             <mu-col width="30" tablet="30" desktop="30">
               <mu-card>
                 <mu-card-media>
-                  <img src="https://qidian.qpic.cn/qdbimg/349573/3552978/150" />
+                  <img :src="coverBaseUrl + bookItem.cover"/>
                 </mu-card-media>
               </mu-card>
             </mu-col>
             <mu-col width="70" tablet="70" desktop="70">
-              <mu-sub-header>{{bookItem.bookName}}</mu-sub-header>
+              <mu-sub-header>{{bookItem.book_name}}</mu-sub-header>
               <mu-content-block>
-                　当历史变成传说当传说变成神话当神话
+                　{{bookItem.describe}}
               </mu-content-block>
               <mu-content-block>
                 <div class="head_book_bottom">
@@ -64,12 +66,15 @@
 </template>
 
 <script>
+import {coverBaseUrl} from '@/config/env'
 import ReadHeader from '@/components/header/Header'
+import headBar from '@/components/header/headBar'
 
 export default {
   name: 'Library',
   components: {
     ReadHeader,
+    headBar
   },
   data () {
     const bookList = [];
@@ -94,6 +99,7 @@ export default {
     }
 
     return {
+        coverBaseUrl,
       filterTags,
       selectedTags,
 
@@ -145,14 +151,14 @@ export default {
     },
     getBookList () {
       let bookList;
-      axios.get('/BookListAPIView/', {
+      axios.get('/api/LibraryBookViewAPI/', {
       params: {
         numPage: this.numPage
         }
       })
       .then(res => {
           if (res.status === 200) {
-              bookList = res.data.bookList;
+              bookList = res.data.book_items;
               for (let i in bookList) {
                   this.bookList.push(bookList[i])
               }

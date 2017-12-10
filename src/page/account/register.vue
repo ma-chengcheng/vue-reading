@@ -126,11 +126,9 @@ export default {
     //
     register() {
       if (this.rightPhone && this.rightVerifyCode && this.rightPassowrd) {
-          axios.get('/UserRegisterAPIView/',{
-            params: {
-              phone: this.phone,
-              password: this.password
-            }
+          axios.post('/UserRegisterAPIView/',{
+            phone: this.phone,
+            password: this.password
           })
           .then(res => {
             if ('true' == res.data.state) {
