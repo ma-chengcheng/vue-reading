@@ -11,7 +11,7 @@
                 </div>
             </div>
 
-            <mu-tabs @change="handleTabChange">
+            <mu-tabs :value="tab_value" @change="handleTabChange">
                 <mu-tab value="home" title="首页"/>
                 <mu-tab value="rank" title="排行"/>
                 <mu-tab value="library" title="书库"/>
@@ -37,7 +37,7 @@
                 avatarBaseUrl
             }
         },
-        props: ['head_title', 'head_bar', 'head_index'],
+        props: ['head_title', 'head_bar', 'head_index', 'tab_value'],
         mounted() {
           // 获取用户信息
           this.getUserPrpfile();
@@ -88,6 +88,7 @@
         position: fixed;
         width: 100%;
         top: 0;
+        z-index: 300;
     }
 
     .user-avatar{

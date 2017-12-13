@@ -51,11 +51,10 @@
 <script>
 import {coverBaseUrl} from '@/config/env'
 export default {
-    name: 'NewBook',
     data(){
         return {
             coverBaseUrl,
-            module_title: '新书抢先',
+            module_title: '精品书籍',
             head_book: {},
             book_list: {}
         }

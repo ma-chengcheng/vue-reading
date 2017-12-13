@@ -1,6 +1,6 @@
 <template>
   <div>
-    <head-bar head_index='true'></head-bar>
+    <head-bar head_index='true' tab_value='home'></head-bar>
     <div id="home-page">
       <!-- 搜索 -->
       <!-- <div id="search">
@@ -8,34 +8,31 @@
       </div> -->
 
       <!-- 搜索下方的热推 -->
-      <RecommendImg/>
+      <recommendImg/>
 
       <!-- 热门推荐 -->
-      <HotBook class="card-column"/>
+      <hotBook class="card-column"/>
 
       <!-- 免费书籍 -->
-      <FreeBook class="card-column"/>
+      <freeBook class="card-column"/>
 
       <!-- 精品书籍 -->
-      <QualityBook class="card-column"/>
+      <qualityBook class="card-column"/>
 
       <!-- 热门书籍 -->
-      <NewBook class="card-column"/>
+      <newBook class="card-column"/>
 
-      <!-- 排行榜 -->
-      <Rank class="card-column"/>
     </div>
     <ReadFooter/>
   </div>
 </template>
 
 <script>
-import FreeBook from '@/components/home/FreeBook'
-import NewBook from '@/components/home/NewBook'
-import HotBook from '@/components/home/HotBook'
-import QualityBook from '@/components/home/QualityBook'
-import RecommendImg from '@/components/home/RecommendImg'
-import Rank from '@/components/home/Rank'
+import freeBook from '@/components/home/freeBook'
+import newBook from '@/components/home/newBook'
+import hotBook from '@/components/home/hotBook'
+import qualityBook from '@/components/home/qualityBook'
+import recommendImg from '@/components/home/recommendImg'
 import headBar from '@/components/header/headBar'
 import ReadFooter from '@/components/footer/Footer'
 
@@ -44,12 +41,11 @@ import ReadFooter from '@/components/footer/Footer'
 export default {
   name: 'Home',
   components: {
-    RecommendImg,
-    HotBook,
-    QualityBook,
-    NewBook,
-    FreeBook,
-    Rank,
+    recommendImg,
+    hotBook,
+    qualityBook,
+    newBook,
+    freeBook,
     headBar,
     ReadFooter
   }

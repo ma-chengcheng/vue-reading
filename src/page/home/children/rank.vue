@@ -1,7 +1,6 @@
 <template>
   <div>
     <!-- <ReadHeader/> -->
-    <head-bar head_index='true' tab_value='rank'></head-bar>
     <div id="rank">
           <!-- 点击榜 -->
         <mu-card>
@@ -54,16 +53,12 @@
 </template>
 
 <script>
-import ReadHeader from '@/components/header/Header'
 import ReadFooter from '@/components/footer/Footer'
-import headBar from '@/components/header/headBar'
 
 export default {
   name: 'Rank',
   components: {
-    ReadHeader,
     ReadFooter,
-    headBar
   },
   data(){
     return{

@@ -1,7 +1,5 @@
 <template>
   <div>
-    <!-- <ReadHeader/> -->
-    <head-bar head_index='true' tab_value='library'></head-bar>
     <mu-bottom-nav :value="bottomNav"  @change="handleChange">
       <mu-bottom-nav-item value="people" title="人气" icon="favorite"/>
       <mu-bottom-nav-item value="favorites" title="时间" icon="restore"/>
@@ -67,14 +65,11 @@
 
 <script>
 import {coverBaseUrl} from '@/config/env'
-import ReadHeader from '@/components/header/Header'
-import headBar from '@/components/header/headBar'
 
 export default {
   name: 'Library',
   components: {
     ReadHeader,
-    headBar
   },
   data () {
     const bookList = [];

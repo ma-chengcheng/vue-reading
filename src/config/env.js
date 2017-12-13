@@ -1,5 +1,5 @@
-let avatarBaseUrl = 'http://127.0.0.1:8000/static/images/avatar/';
-let coverBaseUrl = 'http://127.0.0.1:8000/static/images/cover/';
+let avatarBaseUrl = '/api/static/images/avatar/';
+let coverBaseUrl = '/api/static/images/cover/';
 
 export{
   coverBaseUrl,

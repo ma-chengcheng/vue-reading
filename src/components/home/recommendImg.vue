@@ -23,7 +23,6 @@
 <script>
 import {coverBaseUrl} from '@/config/env'
 export default {
-  name: 'RecommendImg',
   data(){
     return {
         coverBaseUrl,

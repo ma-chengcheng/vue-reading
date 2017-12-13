@@ -51,7 +51,6 @@
 <script>
 import {coverBaseUrl} from '@/config/env'
 export default {
-    name: 'FreeBook',
     data(){
         return {
             coverBaseUrl,
