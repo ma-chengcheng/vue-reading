@@ -5,6 +5,7 @@ import Home from '@/page/home/home'
 import rank from '@/page/rank/rank'
 import library from '@/page/library/library'
 import book from '@/page/book/book'
+import search from '@/page/search/search'
 
 
 import user from '@/page/user/user'
@@ -53,6 +54,10 @@ const routes = [
       {
         path: '/forget',
         component: forget
+      },
+      {
+        path: '/search',
+        component: search
       },
       {
         path: '/user',

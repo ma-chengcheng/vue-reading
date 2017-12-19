@@ -15,7 +15,7 @@
       <br>
       <mu-flexbox>
         <mu-flexbox-item  class="flex-footer">
-        Copyright © 2017 beluaga
+        Copyright © 2017 beluga
         </mu-flexbox-item>
       </mu-flexbox>
     </mu-paper>

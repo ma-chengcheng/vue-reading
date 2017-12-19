@@ -11,6 +11,7 @@ import 'muse-ui/dist/muse-ui.css'
 import 'muse-ui/dist/theme-light.css' // 使用 carbon 主题
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import 'material-design-icons/iconfont/material-icons.css'
 
 
 Vue.use(MuseUI)

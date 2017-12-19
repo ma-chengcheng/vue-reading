@@ -1,69 +1,28 @@
 <template>
   <div>
-    <!-- <ReadHeader/> -->
     <head-bar head_index='true' tab_value='rank'></head-bar>
-    <div id="rank">
-          <!-- 点击榜 -->
-        <mu-card>
-          <mu-sub-header class="title"><b>点击榜</b></mu-sub-header>
-          <mu-list>
-            <div v-for="(book_click_item, index) in book_click_list">
-              <mu-divider/>
-              <mu-list-item v-bind:title="book_click_item.book_name" to="/BookDetail/">
-                <mu-avatar v-if="index < 3" slot="left" color="#ffffff" backgroundColor="#45494d" size="30">{{index + 1}}</mu-avatar>
-                <mu-avatar v-else slot="left" color="#ffffff" size="30">{{index + 1}}</mu-avatar>
-                <mu-icon slot="right" value="chevron_right"/>
-              </mu-list-item>
-            </div>
-          </mu-list>
-        </mu-card>
 
-          <!-- 订阅榜 -->
-        <mu-card>
-          <mu-sub-header class="title"><b>订阅榜</b></mu-sub-header>
-          <mu-list>
-            <div v-for="(book_subscribe_itme, index) in book_subscribe_list">
-              <mu-divider/>
-              <mu-list-item v-bind:title="book_subscribe_itme.book_name" to="/BookDetail/">
-                <mu-avatar v-if="index < 3" slot="left" color="#ffffff" backgroundColor="#45494d" size="30">{{index + 1}}</mu-avatar>
-                <mu-avatar v-else slot="left" color="#ffffff" size="30">{{index + 1}}</mu-avatar>
-                <mu-icon slot="right" value="chevron_right"/>
-              </mu-list-item>
-            </div>
-          </mu-list>
-        </mu-card>
+    <rank-module module_title="点击榜"></rank-module>
+    <rank-module module_title="订阅榜"></rank-module>
+    <rank-module module_title="捧场榜"></rank-module>
+    <rank-module module_title="新书榜"></rank-module>
+    <rank-module module_title="追书榜"></rank-module>
 
-
-          <!-- 追书榜 -->
-        <mu-card>
-          <mu-sub-header class="title"><b>追书榜</b></mu-sub-header>
-          <mu-list>
-          <div v-for="(book_run_item, index) in book_run_list">
-            <mu-divider/>
-            <mu-list-item v-bind:title="book_run_item.book_name" to="/BookDetail/">
-              <mu-avatar v-if="index < 3" slot="left" color="#ffffff" backgroundColor="#45494d" size="30">{{index + 1}}</mu-avatar>
-              <mu-avatar v-else slot="left" color="#ffffff" size="30">{{index + 1}}</mu-avatar>
-              <mu-icon slot="right" value="chevron_right"/>
-            </mu-list-item>
-          </div>
-          </mu-list>
-        </mu-card>
-    </div>
   <ReadFooter/>
   </div>
 </template>
 
 <script>
-import ReadHeader from '@/components/header/Header'
 import ReadFooter from '@/components/footer/Footer'
 import headBar from '@/components/header/headBar'
+import rankModule from '@/components/rank/rankModule'
 
 export default {
   name: 'Rank',
   components: {
-    ReadHeader,
     ReadFooter,
-    headBar
+    headBar,
+    rankModule
   },
   data(){
     return{

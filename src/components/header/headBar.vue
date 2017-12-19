@@ -4,9 +4,16 @@
         <div v-if="head_index">
             <div class="header-index">
                 <div class="header-operate">
+                    <router-link to="/search">
+                        <span style="padding-right: 8px;">
+                            <i class="material-icons head-icon">search</i>
+                        </span>
+                    </router-link>
                     <router-link to="/user">
-                        <mu-icon v-if="!user_is_active" value="account_circle" size='30'/>
-                        <img v-if="user_is_active" class="user-avatar" :src="avatarBaseUrl + avatar">
+                        <span>
+                            <i v-if="!user_is_active" class="material-icons head-icon">perm_identity</i>
+                            <img v-if="user_is_active" class="user-avatar" :src="avatarBaseUrl + avatar">
+                        </span>
                     </router-link>
                 </div>
             </div>
@@ -20,7 +27,7 @@
         </div>
 
         <!-- 二级头部 -->
-        <mu-appbar v-if="head_bar" :title="head_title">
+        <mu-appbar class="header-bar" v-if="head_bar" :title="head_title">
             <mu-icon-button icon="chevron_left" slot="left" @click="$router.go(-1)"/>
         </mu-appbar>
     </div>
@@ -84,6 +91,11 @@
 </script>
 
 <style scoped>
+    .material-icons.head-icon{
+        color: #47b2d8;
+        font-size: 26px;
+    }
+
     .head-bar{
         position: fixed;
         width: 100%;
@@ -91,21 +103,24 @@
         z-index: 300;
     }
 
-    .user-avatar{
-        border-radius: 50%;
-        width: 30px;
-        height: auto;
-    }
 
     .header-index{
-        height: 48px;
         padding: 10px 15px 10px 15px;
+        height: 45px;
         margin-left: 15px;
         background: url(../../assets/maoyuedu_logo.png) no-repeat left center;
         background-size: 100px auto;
     }
 
     .header-operate{
+        line-height: 40px;
         float: right;
+    }
+
+
+    .user-avatar{
+        border-radius: 50%;
+        height: 26px;
+        width: 26px;
     }
 </style>

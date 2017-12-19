@@ -32,33 +32,8 @@
     <mu-divider/>
 
     <mu-list>
-        <!-- <mu-list-item　v-for="bookItem in bookList" to="/BookDetail/"> -->
-        <mu-list-item　v-for="bookItem in bookList" to="/BookDetail/">
-          <mu-row gutter class="r-row">
-            <mu-col width="30" tablet="30" desktop="30">
-              <mu-card>
-                <mu-card-media>
-                  <img :src="coverBaseUrl + bookItem.cover"/>
-                </mu-card-media>
-              </mu-card>
-            </mu-col>
-            <mu-col width="70" tablet="70" desktop="70">
-              <mu-sub-header>{{bookItem.book_name}}</mu-sub-header>
-              <mu-content-block>
-                　{{bookItem.describe}}
-              </mu-content-block>
-              <mu-content-block>
-                <div class="head_book_bottom">
-                  <mu-icon value="person" :size="15"/>
-                  <span>{{bookItem.author}}</span>
-                  <div class="head_book-type">
-                    {{bookItem.type}}
-                  </div>
-                </div>
-              </mu-content-block>
-            </mu-col>
-          </mu-row>
-          <mu-divider/>
+         <mu-list-item　v-for="bookItem in bookList" to="/book/">
+            <book-item :book="bookItem"></book-item>
         </mu-list-item>
     </mu-list>
     <mu-infinite-scroll :scroller="scroller" :loading="loading" @load="loadMore" loadingText="猫猫为您加载中"/>
@@ -66,18 +41,16 @@
 </template>
 
 <script>
-import {coverBaseUrl} from '@/config/env'
-import ReadHeader from '@/components/header/Header'
 import headBar from '@/components/header/headBar'
+import bookItem from '@/components/common/bookItem'
 
 export default {
   name: 'Library',
   components: {
-    ReadHeader,
-    headBar
+    headBar,
+    bookItem,
   },
   data () {
-    const bookList = [];
 
     const filterTags = {
       '类型': {'仙剑': false, '玄幻': false, '悬疑': false, '奇幻': false, '军事': false,
@@ -99,11 +72,10 @@ export default {
     }
 
     return {
-        coverBaseUrl,
       filterTags,
       selectedTags,
 
-      bookList,
+      bookList: [],
       numPage: 1,
       num: 10,
 
@@ -132,8 +104,8 @@ export default {
           this.open = !this.open
           this.docked = false
           break;
-        default:
           this.bottomNav = tag
+        default:
           console.log(tag);
       }
     },
@@ -147,7 +119,7 @@ export default {
         this.getBookList()
         this.num += 10
         this.loading = false
-      }, 1000)
+    }, 1500)
     },
     getBookList () {
       let bookList;
@@ -221,9 +193,7 @@ export default {
 </script>
 
 <style scoped>
-.r-row{
-  margin-bottom: 15px;
-}
+
 
   #head-title{
     color: #000000;

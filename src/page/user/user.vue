@@ -2,7 +2,7 @@
     <div>
         <head-bar head_bar='true' :head_title="head_title"></head-bar>
         <mu-content-block class="content">
-            <mu-card class="r-user-card">
+            <mu-card class="user-card">
                 <mu-list-item v-show="user_is_active" to="/user/profile" class="Top-list-item">
                     <div style="text-align: center; width: 100%">
                         <img class="r-user-avatar" :src="avatarBaseUrl + avatar">
@@ -139,9 +139,6 @@
         margin-top: 70px;
     }
 
-    .r-user-card{
-      padding-top: 5px;
-    }
 
     .r-user-avatar{
     border-radius: 50%;
