@@ -92,27 +92,27 @@
       </mu-list-item>
       <mu-list-item>
         <mu-radio label="猫球　100猫币/个" name="group" nativeValue="simple1" v-model="value"/>
-        <mu-avatar src="../static/images//donate/1.png" slot="rightAvatar"/>
+        <mu-avatar src="../static/images/donate/1.png" slot="rightAvatar"/>
       </mu-list-item>
       <mu-list-item>
         <mu-radio label="猫薄荷　500猫币/个" name="group" nativeValue="simple1" v-model="value"/>
-        <mu-avatar src="../static/images//donate/2.png" slot="rightAvatar"/>
+        <mu-avatar src="../static/images/donate/2.png" slot="rightAvatar"/>
       </mu-list-item>
       <mu-list-item>
         <mu-radio label="逗猫棒　1000猫币/个" name="group" nativeValue="simple1" v-model="value"/>
-        <mu-avatar src="../static/images//donate/3.png" slot="rightAvatar"/>
+        <mu-avatar src="../static/images/donate/3.png" slot="rightAvatar"/>
       </mu-list-item>
       <mu-list-item>
         <mu-radio label="鱼　3000猫币/个" name="group" nativeValue="simple1" v-model="value"/>
-        <mu-avatar src="../static/images//donate/4.png" slot="rightAvatar"/>
+        <mu-avatar src="../static/images/donate/4.png" slot="rightAvatar"/>
       </mu-list-item>
       <mu-list-item>
         <mu-radio label="猫粮　5000猫币/个" name="group" nativeValue="simple1" v-model="value"/>
-        <mu-avatar src="../static/images//donate/5.png" slot="rightAvatar"/>
+        <mu-avatar src="../static/images/donate/5.png" slot="rightAvatar"/>
       </mu-list-item>
       <mu-list-item>
         <mu-radio label="猫窝　10000猫币/个" name="group" nativeValue="simple1" v-model="value"/>
-        <mu-avatar src="../static/images//donate/6.png" slot="rightAvatar"/>
+        <mu-avatar src="../static/images/donate/6.png" slot="rightAvatar"/>
       </mu-list-item>
       <mu-list-item>
         <mu-raised-button @click="closeBottomSheet"  class="demo-raised-button" label="打赏" fullWidth="true" secondary/>

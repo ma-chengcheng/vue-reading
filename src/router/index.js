@@ -4,6 +4,7 @@ import App from '../App'
 import Home from '@/page/home/home'
 import rank from '@/page/rank/rank'
 import library from '@/page/library/library'
+import pay from '@/page/pay/pay'
 import book from '@/page/book/book'
 import search from '@/page/search/search'
 
@@ -42,6 +43,10 @@ const routes = [
       {
         path: '/library',
         component: library
+      },
+      {
+          path: '/pay',
+          component: pay
       },
       {
         path: '/login',

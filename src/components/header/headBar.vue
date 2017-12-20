@@ -75,7 +75,7 @@
                       this.$router.push('/library/');
                       break;
                   case 'recharge':
-                    　　this.$router.push('/recharge/');
+                    　　this.$router.push('/pay/');
                         break;
                 　default:
                 　　　　　this.$router.push('/');
@@ -100,7 +100,6 @@
         position: fixed;
         width: 100%;
         top: 0;
-        z-index: 300;
     }
 
 
