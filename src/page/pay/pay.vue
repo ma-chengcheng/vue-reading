@@ -36,7 +36,7 @@
                 <p>2. 猫阅读充值，1元兑换100猫币</p>
                 <p>3. 若充值后账户余额长时间无变化，请书城客服联系</p>
             </div>
-            <mu-raised-button label="提交" class="demo-raised-button" fullWidth secondary/>
+            <mu-raised-button @click="payMoney" label="提交" class="demo-raised-button" fullWidth secondary/>
         </mu-content-block>
     </div>
 </template>
@@ -54,18 +54,26 @@ export default {
         head_title: '充值',
 
         userId: '1505120206',
-        value: '',
-        payType: 0
+        money: 0,
     }
   },
   methods: {
     slectMoney(val) {
       //绑定选择金额
-      this.value = val
+      this.money = val
     },
-    changePayType(val){
-      this.payType = val
-
+    payMoney () {
+        axios.get('/api/PayAPIView/', {
+        params: {
+          money: this.money
+          }
+        })
+        .then(res => {
+            if (res.status === 200) {
+                window.location.href = res.data.request_url;
+            }
+          }
+        )
     }
   }
 }

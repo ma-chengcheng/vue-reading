@@ -6,6 +6,7 @@ import rank from '@/page/rank/rank'
 import library from '@/page/library/library'
 import pay from '@/page/pay/pay'
 import book from '@/page/book/book'
+import catalog from '@/page/book/children/catalog'
 import search from '@/page/search/search'
 
 
@@ -101,7 +102,13 @@ const routes = [
 
   {
     path: '/book',
-    component: book
+    component: book,
+    children: [
+        {
+            path: 'catalog',
+            component: catalog
+        }
+    ]
   },
 ]
 

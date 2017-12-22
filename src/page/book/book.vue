@@ -33,7 +33,7 @@
 
     <!-- 章节目录 -->
     <mu-list>
-      <mu-list-item title="目录">
+      <mu-list-item title="目录" to="/book/catalog">
         <mu-icon slot="right" value="chevron_right"/>
       </mu-list-item>
       <mu-divider/>
@@ -173,7 +173,11 @@
         <mu-raised-button　label="开始阅读" style="width: 32%; height: 50px;" primary/>
         <mu-flat-button label="自动订阅" style="width: 32%; height: 45px;"/>
   </div>
+  <transition name="router-slid" mode="out-in">
+      <router-view></router-view>
+  </transition>
   </div>
+
 </template>
 
 <script>
@@ -307,5 +311,13 @@ text-align: center;
 .r-comment-sheet{
   position: fixed;
   top: 0px;
+}
+
+.router-slid-enter-active, .router-slid-leave-active {
+  transition: all .4s;
+}
+.router-slid-enter, .router-slid-leave-active {
+  transform: translate3d(2rem, 0, 0);
+  opacity: 0;
 }
 </style>

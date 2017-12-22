@@ -54,7 +54,7 @@ export default {
     // 手机输入错误提醒
     phoneInputError(){
       if (this.checkPhone) {
-        axios.get('/IsRegisteredAPIView/',{
+        axios.get('/api/IsRegisteredAPIView/',{
           params: {
             phone: this.phone
           }
@@ -84,7 +84,7 @@ export default {
                     clearInterval(this.timer)
                 }
             }, 1000)
-            axios.get('/SendMessageAPIView/',{
+            axios.get('/api/SendMessageAPIView/',{
               params: {
                 phone: this.phone
               }
@@ -94,7 +94,7 @@ export default {
     // 检查验证码
     checkVerifyCode() {
       if (this.computedTime) {
-          axios.get('/CheckVerifyCodeAPIView/',{
+          axios.get('/api/CheckVerifyCodeAPIView/',{
             params: {
               verifyCode: this.verifyCode
             }
@@ -126,7 +126,7 @@ export default {
     //
     register() {
       if (this.rightPhone && this.rightVerifyCode && this.rightPassowrd) {
-          axios.post('/UserRegisterAPIView/',{
+          axios.post('/api/UserRegisterAPIView/',{
             phone: this.phone,
             password: this.password
           })
