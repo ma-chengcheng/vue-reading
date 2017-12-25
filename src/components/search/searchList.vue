@@ -1,5 +1,11 @@
 <template>
     <div class="search-list">
+        <mu-content-block  v-if="!bookList || bookList == ''">
+            <div class="no-find">
+                <img src="http://img3.zhangyue.com/fh/common/static/i/xiaoi_upset_ae8a590.png">
+                <div class="text">未找的相关书籍</div>
+            </div>
+        </mu-content-block>
         <mu-list>
              <mu-list-item　v-for="bookItem in bookList" to="/book/">
                 <book-item :book="bookItem"></book-item>
@@ -36,13 +42,29 @@
             },
             searchBook: function(new_search_book){
                 this.bookList = new_search_book;
+                console.log(this.bookList);
             }
         }
     }
 </script>
 
-<style>
+<style lang="scss" e scoped>
 .search-list{
     padding-top: 38px;
+}
+
+.no-find{
+    margin-top: 80px;
+    text-align: center;
+    img{
+        width: 200px;
+        height: auto;
+    }
+    .text{
+        position: relative;
+        text-align: center;
+        color: #999;
+        font-size: 1rem;
+    }
 }
 </style>
