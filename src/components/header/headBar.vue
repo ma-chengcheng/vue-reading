@@ -75,7 +75,7 @@
                       this.$router.push('/library/');
                       break;
                   case 'recharge':
-                    　　this.$router.push('/pay/');
+                        this.$router.push('/pay/');
                         break;
                 　default:
                 　　　　　this.$router.push('/');

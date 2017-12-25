@@ -5,25 +5,37 @@
                 <i class="material-icons go-back">chevron_left</i>
             </div>
             <div class="input-box">
-                <input class="input" placeholder="书名/作者名">
+                <input  v-model:value="keyValue"  class="input" placeholder="书名/作者名">
             </div>
-            <div >
+            <div @click="search" >
                 <i class="material-icons search">search</i>
             </div>
         </div>
-        <search-list></search-list>
+        <search-list :key_value="keyValue"></search-list>
     </div>
 </template>
 
 <script>
     import searchList from '@/components/search/searchList'
+    import {mapState} from 'vuex'
+
     export default{
         components: {
             searchList
         },
+        computed: {
+            ...mapState([
+                'searchBook'
+            ])
+        },
         data() {
             return{
-                
+                keyValue: "",
+            }
+        },
+        methods: {
+            search(){
+                console.log(this.searchBook);
             }
         }
     }

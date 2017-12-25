@@ -1,7 +1,8 @@
 import {
   RECORD_USERINFO,
   GET_USERPROFILE,
-  OUT_LOGIN
+  OUT_LOGIN,
+  GET_SEARCH_RESULT
 } from './mutation-types.js'
 
 export default {
@@ -15,5 +16,8 @@ export default {
   },
   [OUT_LOGIN](state){
       state.user_is_active = false;
+  },
+  [GET_SEARCH_RESULT](state, data){
+      state.searchBook = data.book_items;
   }
 }

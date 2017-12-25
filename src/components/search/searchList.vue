@@ -10,39 +10,33 @@
 
 <script>
     import bookItem from '@/components/common/bookItem'
+    import {mapState} from 'vuex'
+
     export default{
         components: {
             bookItem,
         },
+        props: ['key_value'],
         data(){
             return {
                 bookList: []
             }
         },
         created(){
-            this.initData();
+            // this.initData();
         },
-        methods: {
-            initData(){
-                this.getBookList()
+        computed: {
+            ...mapState([
+                'searchBook'
+            ])
+        },
+        watch: {
+            key_value: function (new_key_value) {
+                this.$store.dispatch('searchBookAction', new_key_value)
             },
-            getBookList () {
-              let bookList;
-              axios.get('/api/LibraryBookViewAPI/', {
-              params: {
-                numPage: this.numPage
-                }
-              })
-              .then(res => {
-                  if (res.status === 200) {
-                      bookList = res.data.book_items;
-                      for (let i in bookList) {
-                          this.bookList.push(bookList[i])
-                      }
-                  }
-                }
-              )
-            },
+            searchBook: function(new_search_book){
+                this.bookList = new_search_book;
+            }
         }
     }
 </script>

@@ -3,64 +3,16 @@
         <head-bar head_bar='true' :head_title="head_title"></head-bar>
         <mu-list>
             <mu-list-item>
-                第一章
+                第一章 狄仁杰初探幽州地
             </mu-list-item>
             <mu-list-item>
-                第二章
+                第二章 探奇案狄公重出山
             </mu-list-item>
             <mu-list-item>
-                第三章
+                第三章 使团喋血记 第一章 突厥客喋血甘南道
             </mu-list-item>
             <mu-list-item>
-                第四章
-            </mu-list-item>
-            <mu-list-item>
-                第五章
-            </mu-list-item>
-            <mu-list-item>
-                第六章
-            </mu-list-item>
-            <mu-list-item>
-                第七章
-            </mu-list-item>
-            <mu-list-item>
-                第八章
-            </mu-list-item>
-            <mu-list-item>
-                第九章
-            </mu-list-item>
-            <mu-list-item>
-                第十章
-            </mu-list-item>
-            <mu-list-item>
-                第十一章
-            </mu-list-item>
-            <mu-list-item>
-                第十一章
-            </mu-list-item>
-            <mu-list-item>
-                第十一章
-            </mu-list-item>
-            <mu-list-item>
-                第十一章
-            </mu-list-item>
-            <mu-list-item>
-                第十一章
-            </mu-list-item>
-            <mu-list-item>
-                第十一章
-            </mu-list-item>
-            <mu-list-item>
-                第十一章
-            </mu-list-item>
-            <mu-list-item>
-                第十一章
-            </mu-list-item>
-            <mu-list-item>
-                第十一章
-            </mu-list-item>
-            <mu-list-item>
-                第十一章
+                第四章 金木兰洞中女皇梦
             </mu-list-item>
         </mu-list>
     </div>
@@ -88,7 +40,7 @@ export default{
         right: 0;
         bottom: 0;
         overflow-y: auto;
-        padding-top: 1.95rem;
+        padding-top: 60px;
         z-index: 203;
         background-color: #fff;
     }

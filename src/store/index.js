@@ -16,7 +16,8 @@ const state = {
     recommend_ticket_num: 0,
     diamond_ticket_num: 0,
     balance: 0
-  }
+  },
+  searchBook: []
 }
 
 export default new Vuex.Store({

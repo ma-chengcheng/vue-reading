@@ -1,9 +1,11 @@
 import {
-  getUserInfo
+  getUserInfo,
+  searchBook
 } from '../service/getData'
 
 import {
-  GET_USERPROFILE
+  GET_USERPROFILE,
+  GET_SEARCH_RESULT
 } from './mutation-types.js'
 
 export default {
@@ -17,6 +19,18 @@ export default {
           })
       }else {
           return
+      }
+  },
+
+  async searchBookAction({
+      commit
+  }, key_value){
+      if (key_value != null) {
+          await searchBook(key_value).then(res => {
+              commit(GET_SEARCH_RESULT, res.data);
+          })
+      }else {
+          commit(GET_SEARCH_RESULT, null);          
       }
   }
 }

@@ -14,3 +14,9 @@ export const accountLogin = (phone, password) => axios.post('/api/UserLoginAPIVi
 export const getUserInfo = () => axios.get('/api/UserProfileAPIView/')
 
 export const signout = () => axios.get('/api/UserLogoutAPIView/')
+
+export const searchBook = (key_value) => axios.get('/api/SearchBookAPIView/',{
+    params: {
+    key_value
+    }
+})

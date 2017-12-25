@@ -43,6 +43,7 @@
 
 <script>
 import headBar from '@/components/header/headBar'
+import {mapState, mapMutations, mapActions} from 'vuex'
 
 export default {
   name: 'Home',
@@ -56,6 +57,16 @@ export default {
         userId: '1505120206',
         money: 0,
     }
+  },
+  mounted(){
+      if (!this.user_is_active) {
+          this.$router.push('/login/');
+      }
+  },
+  computed: {
+    ...mapState([
+      'user_is_active'
+    ])
   },
   methods: {
     slectMoney(val) {
