@@ -37,8 +37,8 @@
         <mu-icon slot="right" value="chevron_right"/>
       </mu-list-item>
       <mu-divider/>
-      <mu-list-item >
-        <span class="book-meta">【最新】第10章 月色 </span>
+      <mu-list-item to="/reading/1/5">
+        <span class="book-meta">【最新】第5章 月色 </span>
         <mu-icon slot="right" value="lock" size='14'/>
       </mu-list-item>
       <mu-divider/>
