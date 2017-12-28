@@ -7,16 +7,16 @@
       <swiper-module></swiper-module>
 
       <!-- 新书推荐 -->
-      <list-module module_title="新书上架"></list-module>
+      <list-module module_title="新书上架" module_name="new_book"></list-module>
 
       <!-- 免费书籍 -->
-      <list-module module_title="免费书籍"></list-module>
+      <list-module module_title="免费书籍" module_name="free_book"></list-module>
 
       <!-- 精品书籍 -->
-      <list-module module_title="精品书籍"></list-module>
+      <list-module module_title="精品书籍" module_name="supreme_book"></list-module>
 
       <!-- 热门书籍 -->
-      <list-module module_title="热门书籍"></list-module>
+      <list-module module_title="热门书籍" module_name="hot_book"></list-module>
 
     </div>
     <ReadFooter/>

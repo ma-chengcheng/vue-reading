@@ -31,7 +31,7 @@ export default {
     components: {
         bookItem
     },
-    props: ['module_title'],
+    props: ['module_title', 'module_name'],
     data(){
         return {
             coverBaseUrl,
@@ -40,7 +40,11 @@ export default {
         }
     },
     created: function () {
-        axios.get('/api/ListModuleViewAPI/')
+        axios.get('/api/ListModuleViewAPI/',{
+            params: {
+            module_name: this.module_name
+            }
+        })
         .then(res => {
             if (res.status === 200) {
                 this.top_book = res.data.top_book;

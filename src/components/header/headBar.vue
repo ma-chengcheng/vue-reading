@@ -24,6 +24,7 @@
                 <mu-tab value="library" title="书库"/>
                 <mu-tab value="recharge" title="充值"/>
             </mu-tabs>
+            <mu-toast v-if="toast" message="请登录后重试" @close="hideToast"/>
         </div>
 
         <!-- 二级头部 -->
@@ -40,8 +41,9 @@
         name: 'headBar',
         data(){
             return{
+                toast: false,
                 avatar: '',
-                avatarBaseUrl
+                avatarBaseUrl,
             }
         },
         props: ['head_title', 'head_bar', 'head_index', 'tab_value'],
@@ -75,7 +77,16 @@
                       this.$router.push('/library/');
                       break;
                   case 'recharge':
-                        this.$router.push('/pay/');
+                    if (!this.user_is_active) {
+                            this.toast = true
+                            setTimeout(() => {
+                                  this.toast = false;
+                                  this.$router.push('/pay/');
+                              }, 1500)
+
+                        }else  {
+                             this.$router.push('/pay/');
+                        }
                         break;
                 　default:
                 　　　　　this.$router.push('/');

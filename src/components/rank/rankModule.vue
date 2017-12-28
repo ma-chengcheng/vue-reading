@@ -27,7 +27,7 @@ import {coverBaseUrl} from '@/config/env'
         swiper,
         swiperSlide
     },
-    props: ['module_title'],
+    props: ['module_title', 'rank_name'],
     data() {
           return {
             coverBaseUrl,
@@ -56,7 +56,11 @@ import {coverBaseUrl} from '@/config/env'
 
     },
     created: function() {
-      axios.get('/api/SwiperModuleViewAPI/')
+      axios.get('/api/RankListViewAPI/', {
+          params: {
+              rank_name: this.rank_name
+          }
+      })
       .then(res => {
           if (res.status === 200) {
               this.book_items = res.data.book_items;

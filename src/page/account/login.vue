@@ -14,8 +14,8 @@
       <br/>
       <mu-raised-button　@click="login" label="登录" fullWidth primary/>
       <div style="margin-top: 14px;">
-        <router-link to="forget/">忘记密码</router-link>
-        <div id="r-register"><router-link to="register/">注册账号</router-link></div>
+        <router-link to="/forget/">忘记密码</router-link>
+        <div id="r-register"><router-link to="/register/">注册账号</router-link></div>
       </div>
     </mu-content-block>
   </div>
