@@ -7,6 +7,7 @@ import library from '@/page/library/library'
 import pay from '@/page/pay/pay'
 import book from '@/page/book/book'
 import catalog from '@/page/book/children/catalog'
+import reading from '@/page/reading/reading'
 import search from '@/page/search/search'
 
 
@@ -17,6 +18,7 @@ import setPhone from '@/page/user/children/children/setPhone'
 import setUserDescribe from '@/page/user/children/children/setUserDescribe'
 import bookFollow from '@/page/user/children/bookFollow'
 import bookHistory from '@/page/user/children/bookHistory'
+
 
 
 import login from '@/page/account/login'
@@ -110,6 +112,10 @@ const routes = [
         }
     ]
   },
+  {
+      path: '/reading/:booId/:charpterId',
+      component: reading
+  }
 ]
 
 export default new Router({
