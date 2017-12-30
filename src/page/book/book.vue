@@ -1,19 +1,19 @@
 <template>
   <div>
-      <head-bar head_bar='true' :head_title="head_title"></head-bar>
+      <head-bar head_bar='true' :head_title="book_info.book_name"></head-bar>
       <!-- 书籍基本信息 -->
       <mu-content-block style="padding-top: 70px;">
           <div class="book-detail-info">
 
-              <img class="cover" src="https://qidian.qpic.cn/qdbimg/349573/3552978/150"/>
+              <img class="cover" :src="coverBaseUrl + book_info.cover"/>
               <div class="describe">
-                  <h2 class="book-name">修仙神探</h2>
-                  <div class="book-author">胡小蒙</div>
+                  <h2 class="book-name">{{book_info.book_name}}</h2>
+                  <div class="book-author">{{book_info.author}}</div>
                   <div class="book-rate">
                       <el-rate v-model="rate" disabled show-score text-color="#969ba3" score-template="{value}分"></el-rate>
                   </div>
-                  <div class="book-meta">玄幻</div>
-                  <div class="book-meta">13.2万字｜连载</div>
+                  <div class="book-meta">{{book_info.type}}</div>
+                  <div class="book-meta">{{book_info.word_number}}｜{{book_info.update_state}}</div>
               </div>
         </div>
     </mu-content-block>
@@ -22,7 +22,7 @@
     <!-- 书籍简介 -->
     <mu-content-block>
       <section class="brief-info" :style="{maxHeight}" v-on:click="expandMore">
-          <content>内容简介：爱黄金，爱白银，更爱星光璀璨的宝石。枪械，珠宝，还有贵金属，收藏家的世界怎么能少了古董？仓库拍卖，旧货交易，房产收售，还有淘金挖矿，其实要想赚钱那么寻找传说中的宝藏才是王道。麾下坐镇虎猫、苍狼和安第斯神鹰，身边还有忠心猎犬、暴躁巨猿和非洲愣子平头哥，谁说捡宝鉴宝只能靠人？！</content>
+          <content>内容简介：{{book_info.describe}}</content>
           <span class="expand-more" :style="{visibility}">
               <mu-icon value="expand_more"></mu-icon>
           </span>
@@ -183,6 +183,8 @@
 <script>
     import Vue from 'vue'
     import headBar from '@/components/header/headBar'
+    import {coverBaseUrl} from '@/config/env'
+    import {mapState, mapActions} from 'vuex'
     import { Rate } from 'element-ui'
     Vue.use(Rate)
 
@@ -193,6 +195,8 @@
       },
       data () {
         return {
+          coverBaseUrl: '',
+          book_id: '',
           maxHeight: '72px',        // 书籍简介行数
           visibility: 'visible',    // 简介更多图标是否可见
 
@@ -203,7 +207,20 @@
           bottomCommentSheet: false
         }
       },
+      mounted() {
+          this.book_id = this.$route.params.book_id;
+          console.log(this.book_id);
+          this.getBookInfoAction(this.$route.params.book_id)
+      },
+      computed: {
+          ...mapState([
+                  'book_info',
+              ])
+      },
       methods: {
+          ...mapActions([
+            'getBookInfoAction'
+          ]),
         expandMore () {
             console.log("点击");
             this.maxHeight = this.maxHeight != 'none' ? 'none' : '72px'

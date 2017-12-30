@@ -141,6 +141,7 @@ export default {
       })
       .then(res => {
           if (res.status === 200) {
+              this.numPage += 1;
               bookList = res.data.book_items;
               for (let i in bookList) {
                   this.bookList.push(bookList[i])

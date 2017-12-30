@@ -1,11 +1,15 @@
 import {
   getUserInfo,
-  searchBook
+  searchBook,
+  setUserDescribe,
+  getBookInfo
 } from '../service/getData'
 
 import {
   GET_USERPROFILE,
-  GET_SEARCH_RESULT
+  GET_SEARCH_RESULT,
+  SET_USER_DESCRIBE,
+  GET_BOOK_INFO
 } from './mutation-types.js'
 
 export default {
@@ -30,7 +34,25 @@ export default {
               commit(GET_SEARCH_RESULT, res.data);
           })
       }else {
-          commit(GET_SEARCH_RESULT, null);          
+          commit(GET_SEARCH_RESULT, null);
       }
+  },
+
+  async setUserDescribeAction({
+      commit
+  }, new_user_describe){
+      console.log(new_user_describe);
+      await setUserDescribe(new_user_describe).then(res => {
+          commit(GET_USERPROFILE, new_user_describe);
+      })
+  },
+
+  async getBookInfoAction({
+      commit,
+      state
+  }, book_id){
+      getBookInfo(book_id).then(res => {
+          commit(GET_BOOK_INFO, res.data)
+      })
   }
 }

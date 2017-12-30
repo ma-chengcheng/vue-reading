@@ -101,7 +101,7 @@ const routes = [
   },
 
   {
-    path: '/book',
+    path: '/book/:book_id',
     component: book,
     children: [
         {

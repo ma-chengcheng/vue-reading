@@ -20,3 +20,15 @@ export const searchBook = (key_value) => axios.get('/api/SearchBookAPIView/',{
     key_value
     }
 })
+
+
+export const setUserDescribe = (new_user_describe) => axios.post('/api/SetUserDescribeAPIView/', {
+    new_user_describe
+}, config)
+
+
+export const getBookInfo = (book_id) => axios.get('/api/BookInfoAPIView/', {
+    params: {
+        book_id
+    }
+})

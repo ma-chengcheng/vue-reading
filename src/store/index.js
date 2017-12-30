@@ -17,6 +17,14 @@ const state = {
     diamond_ticket_num: 0,
     balance: 0
   },
+  book_info: {
+      author: '',
+      book_name: '',
+      cover: '',
+      describe: '',
+      type: '',
+      update_state: ''
+  },
   searchBook: []
 }
 
