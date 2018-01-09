@@ -195,7 +195,7 @@
       },
       data () {
         return {
-          coverBaseUrl: '',
+          coverBaseUrl,
           book_id: '',
           maxHeight: '72px',        // 书籍简介行数
           visibility: 'visible',    // 简介更多图标是否可见

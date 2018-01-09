@@ -2,12 +2,14 @@
     <div>
       <h3 class="sub_title">{{module_title}}</h3>
       <swiper :options="swiperOption" class="swiper_list">
-            <swiper-slide v-for="book_item in book_items">
+            <swiper-slide v-for="book_item in module_data.book_items">
+                <router-link :to="'/book/' +  book_item.id">
                   <div class="book-cover">
                       <img :src="coverBaseUrl + book_item.cover"/>
                   </div>
                   <div class="book-name">{{book_item.book_name}}</div>
                   <div class="book-author">{{book_item.author}}</div>
+              </router-link>
             </swiper-slide>
       </swiper>
   </div>
@@ -23,11 +25,12 @@ import {coverBaseUrl} from '@/config/env'
         swiper,
         swiperSlide
     },
+    props: ['module_data'],
     data() {
           return {
+            coverBaseUrl,
             module_title: '新书力捧',
 
-            coverBaseUrl,
             swiperOption: {
               slidesPerView: 4,
               spaceBetween: 8,
@@ -46,20 +49,8 @@ import {coverBaseUrl} from '@/config/env'
                   slidesPerView: 3,
                 }
               }
-          },
-
-          book_items: {}
-        }
-
-    },
-    created: function() {
-      axios.get('/api/SwiperModuleViewAPI/')
-      .then(res => {
-          if (res.status === 200) {
-              this.book_items = res.data.book_items;
           }
         }
-      )
     }
   }
 </script>

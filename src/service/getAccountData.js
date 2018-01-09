@@ -1,8 +1,5 @@
-import Cookies from 'js-cookie'
+import config from './config'
 
-let config = {
-  headers: {'X-CSRFtoken': Cookies.get('csrftoken')}
-}
 /**
 * 帐号密码登录
 **/
@@ -27,20 +24,3 @@ export const signout = () => axios.get('/api/UserLogoutAPIView/')
 export const setUserDescribe = (new_user_describe) => axios.post('/api/SetUserDescribeAPIView/', {
     new_user_describe
 }, config)
-
-
-export const getIndexBook = () => axios.get('/api/IndexBookAPIView/')
-
-export const getRankBook = () => axios.get('/api/RankBookAPIView/')
-
-export const getBookInfo = (book_id) => axios.get('/api/BookInfoAPIView/', {
-    params: {
-        book_id
-    }
-})
-
-export const searchBook = (key_value) => axios.get('/api/SearchBookAPIView/',{
-    params: {
-    key_value
-    }
-})

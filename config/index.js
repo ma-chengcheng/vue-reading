@@ -33,7 +33,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://127.0.0.1:8000',
+        target: 'http://api.beluga.ai',
         changeOrigin: true,
         pathRewrite: {
           '^/api' : ''

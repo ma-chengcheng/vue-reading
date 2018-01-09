@@ -2,7 +2,7 @@
     <div>
       <h3 class="sub_title">{{module_title}}</h3>
       <swiper :options="swiperOption" class="swiper_list">
-            <swiper-slide v-for="(book_item, index) in book_items">
+            <swiper-slide v-for="(book_item, index) in module_data.book_items">
                   <div>
                       <div class="sign">
                           <span>{{index+1}}</span>
@@ -27,7 +27,7 @@ import {coverBaseUrl} from '@/config/env'
         swiper,
         swiperSlide
     },
-    props: ['module_title', 'rank_name'],
+    props: ['module_title',　'module_data'],
     data() {
           return {
             coverBaseUrl,
@@ -49,24 +49,9 @@ import {coverBaseUrl} from '@/config/env'
                   slidesPerView: 4,
                 }
               }
-          },
-
-          book_items: {}
-        }
-
-    },
-    created: function() {
-      axios.get('/api/RankListViewAPI/', {
-          params: {
-              rank_name: this.rank_name
-          }
-      })
-      .then(res => {
-          if (res.status === 200) {
-              this.book_items = res.data.book_items;
           }
         }
-      )
+
     }
   }
 </script>

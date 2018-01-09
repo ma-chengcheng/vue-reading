@@ -4,19 +4,18 @@
     <div id="home-page">
 
      <!-- 热门推荐 -->
-      <swiper-module></swiper-module>
-
+      <swiper-module :module_data="index.recommend_book"></swiper-module>
       <!-- 新书推荐 -->
-      <list-module module_title="新书上架" module_name="new_book"></list-module>
+      <list-module module_title="新书上架" module_name="new_book" :module_data="index.new_book"></list-module>
 
       <!-- 免费书籍 -->
-      <list-module module_title="免费书籍" module_name="free_book"></list-module>
+      <list-module module_title="免费书籍" module_name="free_book" :module_data="index.free_book"></list-module>
 
       <!-- 精品书籍 -->
-      <list-module module_title="精品书籍" module_name="supreme_book"></list-module>
+      <list-module module_title="精品书籍" module_name="supreme_book" :module_data="index.superme_book"></list-module>
 
       <!-- 热门书籍 -->
-      <list-module module_title="热门书籍" module_name="hot_book"></list-module>
+      <list-module module_title="热门书籍" module_name="hot_book" :module_data="index.hot_book"></list-module>
 
     </div>
     <ReadFooter/>
@@ -28,6 +27,8 @@ import headBar from '@/components/header/headBar'
 import ReadFooter from '@/components/footer/Footer'
 import swiperModule from '@/components/home/swiperModule'
 import listModule from '@/components/home/listModule'
+import {mapState, mapActions} from 'vuex'
+
 
 export default {
   name: 'Home',
@@ -36,6 +37,22 @@ export default {
     ReadFooter,
     listModule,
     swiperModule
+  },
+computed: {
+    ...mapState([
+        'index'
+        ])
+    },
+  mounted() {
+      this.initData()
+  },
+  methods: {
+      ...mapActions([
+          'getIndexBookAction'
+      ]),
+      initData(){
+          this.getIndexBookAction()
+      }
   }
 }
 </script>

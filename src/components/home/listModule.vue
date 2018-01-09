@@ -3,12 +3,11 @@
         <mu-list>
         　<mu-divider/>
           <h3 class="sub_title">{{module_title}}</h3>
-          <mu-list-item :to="'/book/' +  top_book.id" style="position: relative;">
-              <book-item :book="top_book"></book-item>
+          <mu-list-item :to="'/book/' +  module_data.top_book.id" style="position: relative;">
+              <book-item :book="module_data.top_book"></book-item>
           </mu-list-item>
-
           <!-- 板块书籍列表 -->
-            <mu-list-item v-for="book_item in book_items" :to="'/book/' + book_item.id">
+            <mu-list-item v-for="book_item in module_data.book_items" :to="'/book/' + book_item.id">
               <div class="tag">
                   {{book_item.type}}
               </div>
@@ -27,32 +26,18 @@
 <script>
 import {coverBaseUrl} from '@/config/env'
 import bookItem from '@/components/common/bookItem'
+import {mapState} from 'vuex'
 export default {
     components: {
         bookItem
     },
-    props: ['module_title', 'module_name'],
+    props: ['module_title', 'module_name', 'module_data'],
     data(){
+
         return {
-            coverBaseUrl,
-            top_book: {},
-            book_items: {}
+            coverBaseUrl
         }
-    },
-    created: function () {
-        axios.get('/api/ListModuleViewAPI/',{
-            params: {
-            module_name: this.module_name
-            }
-        })
-        .then(res => {
-            if (res.status === 200) {
-                this.top_book = res.data.top_book;
-                this.book_items = res.data.book_items;
-            }
-        }
-    )
-  }
+    }
 }
 </script>
 

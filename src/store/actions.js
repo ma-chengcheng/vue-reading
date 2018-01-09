@@ -2,14 +2,18 @@ import {
   getUserInfo,
   searchBook,
   setUserDescribe,
-  getBookInfo
+  getBookInfo,
+  getIndexBook,
+  getRankBook
 } from '../service/getData'
 
 import {
   GET_USERPROFILE,
   GET_SEARCH_RESULT,
   SET_USER_DESCRIBE,
-  GET_BOOK_INFO
+  GET_BOOK_INFO,
+  GET_INDEX_BOOK,
+  GET_RANK_BOOK
 } from './mutation-types.js'
 
 export default {
@@ -53,6 +57,24 @@ export default {
   }, book_id){
       getBookInfo(book_id).then(res => {
           commit(GET_BOOK_INFO, res.data)
+      })
+  },
+
+  async getIndexBookAction({
+      commit,
+      state
+  }){
+      await getIndexBook().then(res => {
+          commit(GET_INDEX_BOOK, res.data)
+      })
+  },
+
+  async getRankBookAction({
+      commit,
+      state
+  }){
+      await getRankBook().then(res => {
+          commit(GET_RANK_BOOK, res.data)
       })
   }
 }
