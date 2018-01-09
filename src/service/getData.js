@@ -28,6 +28,17 @@ export const setUserDescribe = (new_user_describe) => axios.post('/api/SetUserDe
     new_user_describe
 }, config)
 
+export const chaseBookRequest = (book_id) => axios.get('/api/ChaseBookAPIView/', {
+    params: {
+        book_id
+    }
+})
+
+export const subscriberBookRequest = (book_id) => axios.get('/api/SubscriberBookAPIView/', {
+    params: {
+        book_id
+    }
+})
 
 export const getIndexBook = () => axios.get('/api/IndexBookAPIView/')
 

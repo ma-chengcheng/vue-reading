@@ -33,13 +33,13 @@
 
     <!-- 章节目录 -->
     <mu-list>
-      <mu-list-item title="目录" to="/book/catalog">
+      <mu-list-item title="目录" :to="'/book/' + book_id + '/catalog'">
         <mu-icon slot="right" value="chevron_right"/>
       </mu-list-item>
       <mu-divider/>
       <mu-list-item >
         <span class="book-meta">【最新】第10章 月色 </span>
-        <mu-icon slot="right" value="lock" size='14'/>
+        <!-- <mu-icon slot="right" value="lock" size='14'/> -->
       </mu-list-item>
       <mu-divider/>
     </mu-list>
@@ -169,9 +169,9 @@
   </mu-dialog>
   <mu-divider/>
   <div style="position: fixed; bottom: 0px;background-color: #ffffff; width: 100%;">
-        <mu-flat-button label="追书" style="width: 32%; height: 45px;"/>
+        <mu-flat-button @click="chaseBook" label="追书" style="width: 32%; height: 45px;"/>
         <mu-raised-button　label="开始阅读" style="width: 32%; height: 50px;" primary/>
-        <mu-flat-button label="自动订阅" style="width: 32%; height: 45px;"/>
+        <mu-flat-button @click="subscriberBook" label="自动订阅" style="width: 32%; height: 45px;"/>
   </div>
   <transition name="router-slid" mode="out-in">
       <router-view></router-view>
@@ -186,6 +186,8 @@
     import {coverBaseUrl} from '@/config/env'
     import {mapState, mapActions} from 'vuex'
     import { Rate } from 'element-ui'
+    import {chaseBookRequest, subscriberBookRequest} from '../../../src/service/getData'
+
     Vue.use(Rate)
 
     export default {
@@ -209,8 +211,7 @@
       },
       mounted() {
           this.book_id = this.$route.params.book_id;
-          console.log(this.book_id);
-          this.getBookInfoAction(this.$route.params.book_id)
+          this.getBookInfoAction(this.book_id)
       },
       computed: {
           ...mapState([
@@ -244,8 +245,11 @@
         closeCommentDialog () {
           this.dialogComment = false;
         },
-        goBack () {
-          this.$router.go(-1);
+        chaseBook () {
+            chaseBookRequest(this.book_id)
+        },
+        subscriberBook () {
+            subscriberBookRequest(this.book_id)
         }
       }
     }
@@ -253,88 +257,88 @@
 
 <style scoped>
 
-.book-detail-info{
-    position: relative;
-    display: block;
-}
+    .book-detail-info{
+        position: relative;
+        display: block;
+    }
 
-.cover{
-    float: left;
-    margin-right: 10px;
-    width: 5.25rem;
-    height: 7.2rem;
-    border-radius: 2px;
-}
-
-
-.describe{
-    position: relative;
-    line-height: 1.4rem;
-}
-
-.book-name{
-    overflow: ellipsis;
-    font-size: 100%;
-    margin: 0;
-}
-
-.book-rate{
-    font-size: .75rem;
-}
-
-.book-author{
-    font-size: 0.75rem;
-    margin-top: 0.2rem;
-    color: #33373d;
-}
-
-.book-meta{
-    margin-top: 0.15rem;
-    font-size: 0.75rem;
-    color: #33373d;
-}
+    .cover{
+        float: left;
+        margin-right: 10px;
+        width: 5.25rem;
+        height: 7.2rem;
+        border-radius: 2px;
+    }
 
 
+    .describe{
+        position: relative;
+        line-height: 1.4rem;
+    }
 
-.brief-info{
-    position: relative;
-    line-height: 24px;
-    overflow: hidden;
-}
+    .book-name{
+        overflow: ellipsis;
+        font-size: 100%;
+        margin: 0;
+    }
 
-.expand-more {
-    position: absolute;
-    right: 0rem;
-    width: 3rem;
-    height: 1.5rem;
-    bottom: 0px;
-    color: #969ba3;
-    text-align: right;
-    background: linear-gradient(to right,rgba(255,255,255,0),#fff 1rem)
-}
+    .book-rate{
+        font-size: .75rem;
+    }
 
-.r-bottom-button{
- width: 32%;
-}
+    .book-author{
+        font-size: 0.75rem;
+        margin-top: 0.2rem;
+        color: #33373d;
+    }
 
-.r-donate-object{
-  width: 80%;
-}
+    .book-meta{
+        margin-top: 0.15rem;
+        font-size: 0.75rem;
+        color: #33373d;
+    }
 
-.r-donate-flexbox{
-text-align: center;
-}
 
-.r-comment-sheet{
-  position: fixed;
-  top: 0px;
-}
 
-.router-slid-enter-active, .router-slid-leave-active {
-  transition: all .4s;
-}
-.router-slid-enter, .router-slid-leave-active {
-  transform: translate3d(2rem, 0, 0);
-  opacity: 0;
-}
+    .brief-info{
+        position: relative;
+        line-height: 24px;
+        overflow: hidden;
+    }
+
+    .expand-more {
+        position: absolute;
+        right: 0rem;
+        width: 3rem;
+        height: 1.5rem;
+        bottom: 0px;
+        color: #969ba3;
+        text-align: right;
+        background: linear-gradient(to right,rgba(255,255,255,0),#fff 1rem)
+    }
+
+    .r-bottom-button{
+     width: 32%;
+    }
+
+    .r-donate-object{
+      width: 80%;
+    }
+
+    .r-donate-flexbox{
+    text-align: center;
+    }
+
+    .r-comment-sheet{
+      position: fixed;
+      top: 0px;
+    }
+
+    .router-slid-enter-active, .router-slid-leave-active {
+      transition: all .4s;
+    }
+    .router-slid-enter, .router-slid-leave-active {
+      transform: translate3d(2rem, 0, 0);
+      opacity: 0;
+    }
 </style>

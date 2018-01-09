@@ -36,8 +36,10 @@
 
     <!-- 书籍列表 -->
     <mu-list>
-         <mu-list-item　v-for="bookItem in bookList" to="/book/">
-            <book-item :book="bookItem"></book-item>
+         <mu-list-item　v-for="book_item in bookList" to="/book/">
+             <router-link :to="'/book/' +  book_item.id">
+                 <book-item :book="book_item"></book-item>
+             </router-link>
         </mu-list-item>
     </mu-list>
     <mu-infinite-scroll :scroller="scroller" :loading="loading" @load="loadMore" loadingText="猫猫为您加载中"/>

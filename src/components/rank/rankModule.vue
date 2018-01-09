@@ -3,6 +3,7 @@
       <h3 class="sub_title">{{module_title}}</h3>
       <swiper :options="swiperOption" class="swiper_list">
             <swiper-slide v-for="(book_item, index) in module_data.book_items">
+                <router-link :to="'/book/' +  book_item.id">
                   <div>
                       <div class="sign">
                           <span>{{index+1}}</span>
@@ -11,6 +12,7 @@
                   </div>
                   <div class="book-name">{{book_item.book_name}}</div>
                   <div class="book-score">3.5</div>
+                </router-link>
             </swiper-slide>
       </swiper>
       <mu-divider/>
