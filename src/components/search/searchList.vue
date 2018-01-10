@@ -42,7 +42,6 @@
             },
             searchBook: function(new_search_book){
                 this.bookList = new_search_book;
-                console.log(this.bookList);
             }
         }
     }

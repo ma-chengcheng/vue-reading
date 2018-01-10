@@ -1,19 +1,19 @@
 <template>
   <div>
-      <head-bar head_bar='true' :head_title="book_info.book_name"></head-bar>
+      <head-bar head_bar='true' :head_title="book.book_info.book_name"></head-bar>
       <!-- 书籍基本信息 -->
       <mu-content-block style="padding-top: 70px;">
           <div class="book-detail-info">
 
-              <img class="cover" :src="coverBaseUrl + book_info.cover"/>
+              <img class="cover" :src="coverBaseUrl + book.book_info.cover"/>
               <div class="describe">
-                  <h2 class="book-name">{{book_info.book_name}}</h2>
-                  <div class="book-author">{{book_info.author}}</div>
+                  <h2 class="book-name">{{book.book_info.book_name}}</h2>
+                  <div class="book-author">{{book.book_info.author}}</div>
                   <div class="book-rate">
                       <el-rate v-model="rate" disabled show-score text-color="#969ba3" score-template="{value}分"></el-rate>
                   </div>
-                  <div class="book-meta">{{book_info.type}}</div>
-                  <div class="book-meta">{{book_info.word_number}}｜{{book_info.update_state}}</div>
+                  <div class="book-meta">{{book.book_info.type}}</div>
+                  <div class="book-meta">{{book.book_info.word_number}}｜{{book.book_info.update_state}}</div>
               </div>
         </div>
     </mu-content-block>
@@ -22,7 +22,7 @@
     <!-- 书籍简介 -->
     <mu-content-block>
       <section class="brief-info" :style="{maxHeight}" v-on:click="expandMore">
-          <content>内容简介：{{book_info.describe}}</content>
+          <content>内容简介：{{book.book_info.describe}}</content>
           <span class="expand-more" :style="{visibility}">
               <mu-icon value="expand_more"></mu-icon>
           </span>
@@ -186,7 +186,7 @@
     import {coverBaseUrl} from '@/config/env'
     import {mapState, mapActions} from 'vuex'
     import { Rate } from 'element-ui'
-    import {chaseBookRequest, subscriberBookRequest} from '../../../src/service/getData'
+    import {chaseBookRequest, subscriberBookRequest} from '../../../src/service/getAccountData'
 
     Vue.use(Rate)
 
@@ -215,7 +215,7 @@
       },
       computed: {
           ...mapState([
-                  'book_info',
+                  'book',
               ])
       },
       methods: {

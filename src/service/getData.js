@@ -1,8 +1,5 @@
-import Cookies from 'js-cookie'
+import {config} from './config'
 
-let config = {
-  headers: {'X-CSRFtoken': Cookies.get('csrftoken')}
-}
 /**
 * 帐号密码登录
 **/
@@ -34,7 +31,7 @@ export const chaseBookRequest = (book_id) => axios.get('/api/ChaseBookAPIView/',
     }
 })
 
-export const subscriberBookRequest = (book_id) => axios.get('/api/SubscriberBookAPIView/', {
+export const subscribeBookRequest = (book_id) => axios.get('/api/SubscribeBookAPIView/', {
     params: {
         book_id
     }

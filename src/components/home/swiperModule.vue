@@ -2,11 +2,11 @@
     <div>
       <h3 class="sub_title">{{module_title}}</h3>
       <swiper :options="swiperOption" class="swiper_list">
-            <swiper-slide v-for="book_item in module_data.book_items">
+            <swiper-slide class="book" style="margin: 10px;" v-for="book_item in module_data.book_items">
                 <router-link :to="'/book/' +  book_item.id">
-                  <div class="book-cover">
-                      <img :src="coverBaseUrl + book_item.cover"/>
-                  </div>
+                  <!-- <div class="book-cover"> -->
+                  <img :src="coverBaseUrl + book_item.cover"/>
+                  <!-- </div> -->
                   <div class="book-name">{{book_item.book_name}}</div>
                   <div class="book-author">{{book_item.author}}</div>
               </router-link>
@@ -32,8 +32,8 @@ import {coverBaseUrl} from '@/config/env'
             module_title: '新书力捧',
 
             swiperOption: {
-              slidesPerView: 4,
-              spaceBetween: 8,
+              slidesPerView: 8,
+              spaceBetween: 4,
               pagination: {
                 el: '.swiper-pagination',
                 clickable: true
@@ -55,7 +55,7 @@ import {coverBaseUrl} from '@/config/env'
   }
 </script>
 
-<style scoped>
+<style  lang="scss" scoped>
 .swiper_list{
     padding: 16px 16px 10px 16px;
     overflow: visible;
@@ -77,23 +77,25 @@ import {coverBaseUrl} from '@/config/env'
     border-left: 3px solid #2196f3;
 }
 
+.book{
 
-.book-cover img{
-    display: block;
-    height: auto;
-    width: 100%;
-    border-radius: 2px;
-    box-shadow: 0 1px 6px rgba(0,0,0,.117647), 0 1px 4px rgba(0,0,0,.117647);
+    img{
+        height: 8rem;
+        width: 6rem;
+        border-radius: 2px;
+        box-shadow: 0 1px 6px rgba(0,0,0,.117647), 0 1px 4px rgba(0,0,0,.117647);
+    }
+
+    .book-name{
+      padding-top: .4rem;
+      font-size: 0.8rem;
+    }
+
+    .book-author{
+        padding-top: .2rem;
+        font-size: 0.6rem;
+        color: #999;
+    }
 }
 
-.book-name{
-  padding-top: .4rem;
-  font-size: 0.8rem;
-}
-
-.book-author{
-    padding-top: .2rem;
-    font-size: 0.rem;
-    color: #999;
-}
 </style>

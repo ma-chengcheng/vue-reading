@@ -15,25 +15,22 @@ const state = {
     avatar: null,
     recommend_ticket_num: 0,
     diamond_ticket_num: 0,
-    balance: 0
-  },
-
-  index: {
+    balance: 0,
+    chase_book: {},
+    subscribe_book: {}
   },
 
   book:{
-    rank: {
-        
+    index: {},
+    rank: {},
+    book_info: {
+        author: '',
+        book_name: '',
+        cover: '',
+        describe: '',
+        type: '',
+        update_state: ''
     }
-  },
-
-  book_info: {
-      author: '',
-      book_name: '',
-      cover: '',
-      describe: '',
-      type: '',
-      update_state: ''
   },
   searchBook: []
 }

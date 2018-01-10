@@ -2,94 +2,22 @@
     <div class="page">
         <head-bar head_bar='true' :head_title="head_title"></head-bar>
 
-    <mu-content-block class="content">
-      <mu-row gutter>
-        <mu-col width="33" tablet="33" desktop="33">
-          <div class="book-grid">
-            <img class="book-cover" style="width: 100%" src="https://qidian.qpic.cn/qdbimg/349573/1003779332/150"/>
-            <span>巫神纪</span>
-          </div>
-        </mu-col>
-        <mu-col width="33" tablet="33" desktop="33">
-          <div class="book-grid">
-            <img class="book-cover" style="width: 100%" src="https://qidian.qpic.cn/qdbimg/349573/1001800553/150"/>
-            <span>巫神纪</span>
-          </div>
-        </mu-col>
-        <mu-col width="33" tablet="33" desktop="33">
-          <div class="book-grid">
-            <img class="book-cover" style="width: 100%" src="https://qidian.qpic.cn/qdbimg/349573/1003354631/150"/>
-            <span>巫神纪</span>
-          </div>
-        </mu-col>
-      </mu-row>
-      <mu-row gutter>
-        <mu-col width="33" tablet="33" desktop="33">
-          <div class="book-grid">
-            <img class="book-cover" style="width: 100%" src="https://qidian.qpic.cn/qdbimg/349573/1004049449/150"/>
-            <span>巫神纪</span>
-          </div>
-        </mu-col>
-        <mu-col width="33" tablet="33" desktop="33">
-          <div class="book-grid">
-            <img class="book-cover" style="width: 100%" src="https://qidian.qpic.cn/qdbimg/349573/3552978/150"/>
-            <span>巫神纪</span>
-          </div>
-        </mu-col>
-        <mu-col width="33" tablet="33" desktop="33">
-          <div class="book-grid">
-            <img class="book-cover" style="width: 100%" src="https://qidian.qpic.cn/qdbimg/349573/1004179514/150"/>
-            <span>巫神纪</span>
-          </div>
-        </mu-col>
-      </mu-row>
-      <mu-row gutter>
-        <mu-col width="33" tablet="33" desktop="33">
-          <div class="book-grid">
-            <img class="book-cover" style="width: 100%" src="https://qidian.qpic.cn/qdbimg/349573/1004185492/150"/>
-            <span>巫神纪</span>
-          </div>
-        </mu-col>
-        <mu-col width="33" tablet="33" desktop="33">
-          <div class="book-grid">
-            <img class="book-cover" style="width: 100%" src="https://qidian.qpic.cn/qdbimg/349573/1004608738/150"/>
-            <span>巫神纪</span>
-          </div>
-        </mu-col>
-        <mu-col width="33" tablet="33" desktop="33">
-          <div class="book-grid">
-            <img class="book-cover" style="width: 100%" src="https://qidian.qpic.cn/qdbimg/349573/1004967523/150"/>
-            <span>巫神纪</span>
-          </div>
-        </mu-col>
-      </mu-row>
-      <mu-row gutter>
-        <mu-col width="33" tablet="33" desktop="33">
-          <div class="book-grid">
-            <img class="book-cover" style="width: 100%" src="https://qidian.qpic.cn/qdbimg/349573/1010047490/150"/>
-            <span>巫神纪</span>
-          </div>
-        </mu-col>
-        <mu-col width="33" tablet="33" desktop="33">
-          <div class="book-grid">
-            <img style="width: 100%" src="https://qidian.qpic.cn/qdbimg/349573/1009438258/150"/>
-            <span>巫神纪</span>
-          </div>
-        </mu-col>
-        <mu-col width="33" tablet="33" desktop="33">
-          <div class="book-grid">
-            <img style="width: 100%" src="https://qidian.qpic.cn/qdbimg/349573/1009438258/150"/>
-            <span>巫神纪</span>
-          </div>
-        </mu-col>
-      </mu-row>
-      <p style="text-align: center; padding-bottom: 30px; color: #686868">21本最近阅读</p>
-    </mu-content-block>
-  </div>
+        <mu-content-block class="content">
+            <div class="grid-list">
+                <div class="grid" v-for="book_item in user_profile.chase_book">
+                    <img :src="coverBaseUrl + book_item.cover"/>
+                    <figcaption>{{book_item.book_name}}</figcaption>
+                </div>
+            </div>
+          <p>{{chaseBookCount}}本最近阅读</p>
+        </mu-content-block>
+    </div>
 </template>
 
 <script>
+import {coverBaseUrl} from '@/config/env'
 import headBar from '@/components/header/headBar'
+import {mapState} from 'vuex'
 
 export default{
   name: 'bookFollow',
@@ -98,36 +26,62 @@ export default{
   },
   data () {
     return {
+        coverBaseUrl,
         head_title: '最近阅读'
     }
   },
-  methods: {
+  computed: {
+    ...mapState([
+      'user_profile',
+    ]),
+    chaseBookCount (){
+        return Object.keys(this.$store.state.user_profile.chase_book).length
+    }
   }
 }
 </script>
 
-<style>
-.page{
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2050;
-  background-color: #fff;
-}
+<style lang="scss" scoped>
+    .page{
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 200;
+      background-color: #fff;
 
-.content{
-    margin-top: 70px;
-}
+          .content{
+              margin-top: 70px;
 
-.book-grid{
-  text-align: left;
-  margin: 0px 10px 22px 10px;
-}
+              .grid-list{
 
-.book-cover{
-  width: 100%;
-  box-shadow: 0 1px 6px rgba(0,0,0,.3), 0 1px 4px rgba(0,0,0,.3);
+                  .grid{
+                      width: calc((100% / 3);
+                      display: inline-block;
+                      vertical-align: top;
+                      padding: 10px;
+
+                      img{
+                          width: 100%;
+                          height: auto;
+                          border-radius: 2px;
+                          box-shadow: 0 1px 6px rgba(0,0,0,.3), 0 1px 4px rgba(0,0,0,.3);
+                      }
+                      figcaption{
+                          font-size: 0.825rem;
+                          line-height: 1.25;
+                          overflow: hidden;
+                          margin: .5rem 0 .125rem;
+                      }
+                  }
+              }
+
+              p{
+                  text-align: center;
+                  padding-bottom: 30px;
+                  color: #686868;
+              }
+          }
 }
 </style>

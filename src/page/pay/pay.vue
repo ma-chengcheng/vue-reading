@@ -90,7 +90,7 @@ export default {
 }
 </script>
 
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 .content{
     margin-top: 50px;
 }

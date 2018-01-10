@@ -96,7 +96,7 @@
     }
 </script>
 
-<style>
+<style lang="scss" scoped>
     .page{
       position: absolute;
       top: 0;
@@ -104,11 +104,11 @@
       right: 0;
       bottom: 0;
       z-index: 203;
-      background-color: #f5f5f5;
+      background-color: #c7ffec;
     }
 
     .content{
-        margin-top: 70px;
+        margin-top: 56px;
     }
 
     .user-info-card{

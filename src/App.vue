@@ -15,9 +15,7 @@ import 'material-design-icons/iconfont/material-icons.css'
 
 
 Vue.use(MuseUI)
-// Vue.use(ElementUI)
 
-import ReadHeader from '@/components/header/Header'
 import ReadFooter from '@/components/footer/Footer'
 
 export default {
@@ -25,5 +23,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+// @import "muse-ui/less/vars.less";
 </style>

@@ -28,10 +28,10 @@ export default {
       state.user_profile.user_describe = data.user_describe
   },
   [GET_BOOK_INFO](state, data){
-      state.book_info = data.book_info;
+      state.book.book_info = data.book_info;
   },
   [GET_INDEX_BOOK](state, data){
-      state.index = data
+      state.book.index = data
   },
   [GET_RANK_BOOK](state, data){
       state.book.rank = data
