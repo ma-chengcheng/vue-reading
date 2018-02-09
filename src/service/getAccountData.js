@@ -35,7 +35,7 @@ export const chaseBookRequest = (book_id) => axios.get('/api/ChaseBookAPIView/',
 /**
 * 订阅请求
 **/
-export const subscriberBookRequest = (book_id) => axios.get('/api/SubscriberBookAPIView/', {
+export const subscribeBookRequest = (book_id) => axios.get('/api/SubscribeBookAPIView/', {
     params: {
         book_id
     }

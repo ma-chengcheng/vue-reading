@@ -9,7 +9,7 @@
                       </div>
                       <img :src="coverBaseUrl + book_item.cover"/>
                   <div class="book-name">{{book_item.book_name}}</div>
-                  <div class="book-score">3.5</div>
+                  <div class="book-score">{{book_item.book_rank}}分</div>
                 </router-link>
             </swiper-slide>
       </swiper>

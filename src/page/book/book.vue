@@ -10,19 +10,20 @@
                   <h2 class="book-name">{{book.book_info.book_name}}</h2>
                   <div class="book-author">{{book.book_info.author}}</div>
                   <div class="book-rate">
-                      <el-rate v-model="rate" disabled show-score text-color="#969ba3" score-template="{value}分"></el-rate>
+                      <el-rate v-model="book.book_info.book_rank" disabled show-score text-color="#969ba3" score-template="{value}分"></el-rate>
                   </div>
-                  <div class="book-meta">{{book.book_info.type}}</div>
+                  <div class="book-meta">{{book.book_info.book_type}}</div>
                   <div class="book-meta">{{book.book_info.word_number}}｜{{book.book_info.update_state}}</div>
               </div>
         </div>
     </mu-content-block>
 
     <mu-divider/>
+
     <!-- 书籍简介 -->
     <mu-content-block>
       <section class="brief-info" :style="{maxHeight}" v-on:click="expandMore">
-          <content>内容简介：{{book.book_info.describe}}</content>
+          <content>内容简介：{{book.book_info.book_describe}}</content>
           <span class="expand-more" :style="{visibility}">
               <mu-icon value="expand_more"></mu-icon>
           </span>
@@ -37,145 +38,126 @@
         <mu-icon slot="right" value="chevron_right"/>
       </mu-list-item>
       <mu-divider/>
-      <mu-list-item >
-        <span class="book-meta">【最新】第10章 月色 </span>
-        <!-- <mu-icon slot="right" value="lock" size='14'/> -->
-      </mu-list-item>
-      <mu-divider/>
     </mu-list>
     <mu-divider/>
 
-  <!-- 打赏 -->
-  <mu-list>
-      <mu-list-item title="去打赏" @click="openBottomSheet">
-        <mu-icon slot="right" value="monetization_on"/>
-      </mu-list-item>
-      <mu-divider/>
-      <mu-list-item>
-        <mu-flexbox>
-          <mu-flexbox-item　class="r-donate-flexbox">
-            <img class="r-donate-object" src="../../assets/images/donate/1.png">
-            <br/><span>1</span><br/>个
-          </mu-flexbox-item>
-          <mu-flexbox-item class="r-donate-flexbox">
-            <img class="r-donate-object" src="../../assets/images/donate/2.png">
-            <br/><span>9</span><br/>个
-          </mu-flexbox-item>
-          <mu-flexbox-item class="r-donate-flexbox">
-            <img class="r-donate-object" src="../../assets/images/donate/3.png">
-            <br/><span>12</span><br/>个
-          </mu-flexbox-item>
-          <mu-flexbox-item class="r-donate-flexbox">
-            <img class="r-donate-object" src="../../assets/images/donate/4.png">
-            <br/><span>8</span><br/>个
-          </mu-flexbox-item class="r-donate-flexbox">
-          <mu-flexbox-item class="r-donate-flexbox">
-            <img class="r-donate-object" src="../../assets/images/donate/5.png">
-            <br/><span>6</span><br/>个
-          </mu-flexbox-item>
-          <mu-flexbox-item class="r-donate-flexbox">
-            <img class="r-donate-object" src="../../assets/images/donate/6.png">
-            <br/><span>1</span><br/>个
-          </mu-flexbox-item>
-        </mu-flexbox>
-      </mu-list-item>
-  </mu-list>
-
-  <!-- 打赏弹出框 -->
-  <mu-bottom-sheet :open="bottomSheet" @close="closeBottomSheet">
+    <!-- 打赏物品数量 -->
     <mu-list>
-      <mu-sub-header>
-        捧场
-      </mu-sub-header>
-      <mu-list-item>
-        <mu-text-field label="数量" fullWidth="true" labelFloat/><br/>
-      </mu-list-item>
-      <mu-list-item>
-        <mu-radio label="猫球　100猫币/个" name="group" nativeValue="simple1" v-model="value"/>
-        <mu-avatar src="../static/images/donate/1.png" slot="rightAvatar"/>
-      </mu-list-item>
-      <mu-list-item>
-        <mu-radio label="猫薄荷　500猫币/个" name="group" nativeValue="simple1" v-model="value"/>
-        <mu-avatar src="../static/images/donate/2.png" slot="rightAvatar"/>
-      </mu-list-item>
-      <mu-list-item>
-        <mu-radio label="逗猫棒　1000猫币/个" name="group" nativeValue="simple1" v-model="value"/>
-        <mu-avatar src="../static/images/donate/3.png" slot="rightAvatar"/>
-      </mu-list-item>
-      <mu-list-item>
-        <mu-radio label="鱼　3000猫币/个" name="group" nativeValue="simple1" v-model="value"/>
-        <mu-avatar src="../static/images/donate/4.png" slot="rightAvatar"/>
-      </mu-list-item>
-      <mu-list-item>
-        <mu-radio label="猫粮　5000猫币/个" name="group" nativeValue="simple1" v-model="value"/>
-        <mu-avatar src="../static/images/donate/5.png" slot="rightAvatar"/>
-      </mu-list-item>
-      <mu-list-item>
-        <mu-radio label="猫窝　10000猫币/个" name="group" nativeValue="simple1" v-model="value"/>
-        <mu-avatar src="../static/images/donate/6.png" slot="rightAvatar"/>
-      </mu-list-item>
-      <mu-list-item>
-        <mu-raised-button @click="closeBottomSheet"  class="demo-raised-button" label="打赏" fullWidth="true" secondary/>
-      </mu-list-item>
-    </mu-list>
-  </mu-bottom-sheet>
-  <mu-divider/>
-
-  <!-- 评论 -->
-  <mu-list style="padding-bottom: 50px;">
-      <mu-list-item title="书友评论" @click="openCommentDialog">
-        <mu-icon slot="right" value="create"/>
-      </mu-list-item>
-      <mu-divider/>
-      <mu-list-item title="Alex Qin" describeText="八月 28, 2014">
-         <mu-avatar src="../static/images/avatar/avatar.jpg" slot="leftAvatar"/>
-         <span>
-           <br/>
-           我们去看电影，最近有部烂片上映，又有吐槽的了
-         </span>
-       </mu-list-item>
-       <mu-divider/>
-       <mu-list-item title="Alex Qin" describeText="八月 28, 2014">
-          <mu-avatar src="../static/images/avatar/avatar.jpg" slot="leftAvatar"/>
-          <span>
-            <br/>
-            我们去看电影，最近有部烂片上映，又有吐槽的了
-          </span>
+        <mu-list-item title="去打赏" @click="openBottomSheet">
+            <mu-icon slot="right" value="monetization_on"/>
         </mu-list-item>
         <mu-divider/>
-        <mu-list-item title="Alex Qin" describeText="八月 28, 2014">
-           <mu-avatar src="../static/images/avatar/avatar.jpg"  slot="leftAvatar"/>
-           <span>
-             <br/>
-             我们去看电影，最近有部烂片上映，又有吐槽的了
-           </span>
-         </mu-list-item>
-         <mu-divider/>
-         <mu-list-item>
-             <mu-raised-button label="查看全部书评" fullWidth/>
-         </mu-list-item>
-       <mu-divider inset/>
-  </mu-list>
-
-  <mu-dialog :open="dialogComment" @close="closeCommentDialog">
-    <mu-list>
-      <mu-list-item>
-        <mu-text-field fullWidth="true"　label="评论 :" multiLine :rows="4" :rowsMax="4" maxLength="20" labelFloat/><br/>
-      </mu-list-item>
-      <mu-list-item>
-        <mu-raised-button @click="closeCommentDialog"  class="demo-raised-button" label="评论" fullWidth="true" secondary/>
-      </mu-list-item>
+        <mu-list-item>
+            <mu-flexbox>
+                <mu-flexbox-item　class="r-donate-flexbox">
+                    <img class="r-donate-object" src="../../assets/images/donate/1.png">
+                    <br/><span>{{book.book_info.cat_ball_num}}</span><br/>个
+                </mu-flexbox-item>
+                <mu-flexbox-item class="r-donate-flexbox">
+                    <img class="r-donate-object" src="../../assets/images/donate/2.png">
+                    <br/><span>{{book.book_info.catnip_num}}</span><br/>个
+                </mu-flexbox-item>
+                <mu-flexbox-item class="r-donate-flexbox">
+                    <img class="r-donate-object" src="../../assets/images/donate/3.png">
+                    <br/><span>{{book.book_info.cat_stick_num}}</span><br/>个
+                </mu-flexbox-item>
+                <mu-flexbox-item class="r-donate-flexbox">
+                    <img class="r-donate-object" src="../../assets/images/donate/4.png">
+                    <br/><span>{{book.book_info.cat_food_num}}</span><br/>个
+                </mu-flexbox-item class="r-donate-flexbox">
+                <mu-flexbox-item class="r-donate-flexbox">
+                    <img class="r-donate-object" src="../../assets/images/donate/5.png">
+                    <br/><span>{{book.book_info.cat_fish_num}}</span><br/>个
+                </mu-flexbox-item>
+                <mu-flexbox-item class="r-donate-flexbox">
+                    <img class="r-donate-object" src="../../assets/images/donate/6.png">
+                    <br/><span>{{book.book_info.cat_house_num}}</span><br/>个
+                </mu-flexbox-item>
+            </mu-flexbox>
+        </mu-list-item>
     </mu-list>
-  </mu-dialog>
-  <mu-divider/>
-  <div style="position: fixed; bottom: 0px;background-color: #ffffff; width: 100%;">
+
+    <!-- 打赏弹出框 -->
+    <mu-bottom-sheet :open="bottomSheet" @close="closeBottomSheet">
+        <mu-list>
+          <mu-sub-header>
+            捧场
+          </mu-sub-header>
+          <mu-list-item>
+            <mu-text-field label="数量" fullWidth="true" type="number"　labelFloat/><br/>
+          </mu-list-item>
+          <mu-list-item>
+            <mu-radio label="猫球　100猫币/个" name="group" nativeValue="simple1" v-model="value"/>
+            <mu-avatar src="../static/images/donate/1.png" slot="rightAvatar"/>
+          </mu-list-item>
+          <mu-list-item>
+            <mu-radio label="猫薄荷　500猫币/个" name="group" nativeValue="simple1" v-model="value"/>
+            <mu-avatar src="../static/images/donate/2.png" slot="rightAvatar"/>
+          </mu-list-item>
+          <mu-list-item>
+            <mu-radio label="逗猫棒　1000猫币/个" name="group" nativeValue="simple1" v-model="value"/>
+            <mu-avatar src="../static/images/donate/3.png" slot="rightAvatar"/>
+          </mu-list-item>
+          <mu-list-item>
+            <mu-radio label="鱼　3000猫币/个" name="group" nativeValue="simple1" v-model="value"/>
+            <mu-avatar src="../static/images/donate/4.png" slot="rightAvatar"/>
+          </mu-list-item>
+          <mu-list-item>
+            <mu-radio label="猫粮　5000猫币/个" name="group" nativeValue="simple1" v-model="value"/>
+            <mu-avatar src="../static/images/donate/5.png" slot="rightAvatar"/>
+          </mu-list-item>
+          <mu-list-item>
+            <mu-radio label="猫窝　10000猫币/个" name="group" nativeValue="simple1" v-model="value"/>
+            <mu-avatar src="../static/images/donate/6.png" slot="rightAvatar"/>
+          </mu-list-item>
+          <mu-list-item>
+            <mu-raised-button @click="closeBottomSheet"  class="demo-raised-button" label="打赏" fullWidth="true" secondary/>
+          </mu-list-item>
+        </mu-list>
+    </mu-bottom-sheet>
+    <mu-divider/>
+
+    <!-- 评论列表 -->
+    <mu-list style="padding-bottom: 50px;">
+        <mu-list-item title="书友评论" @click="openCommentDialog">
+        <mu-icon slot="right" value="create"/>
+        </mu-list-item>
+        <mu-divider/>
+        <mu-list-item :title="book_comment.user_name" :describeText="book_comment.comment_date" v-for="book_comment in book.book_info.book_comment">
+            <mu-avatar src="../static/images/avatar/avatar.jpg" slot="leftAvatar"/>
+                <span>
+                    <br/>
+                    {{book_comment.comment_content}}
+                </span>
+            </mu-list-item>
+        <mu-list-item>
+            <mu-raised-button label="查看全部书评" fullWidth/>
+        </mu-list-item>
+    </mu-list>
+
+    <!-- 评论弹出框 -->
+    <mu-dialog :open="dialogComment" @close="closeCommentDialog">
+        <mu-list>
+            <mu-list-item>
+                <mu-text-field fullWidth="true"　label="评论 :" multiLine :rows="4" :rowsMax="4" maxLength="20" labelFloat/><br/>
+            </mu-list-item>
+            <mu-list-item>
+                <mu-raised-button @click="closeCommentDialog"  class="demo-raised-button" label="评论" fullWidth="true" secondary/>
+            </mu-list-item>
+        </mu-list>
+    </mu-dialog>
+    <mu-divider/>
+
+    <!-- 底部操作按钮 -->
+    <div style="position: fixed; bottom: 0px;background-color: #ffffff; width: 100%;">
         <mu-flat-button @click="chaseBook" label="追书" style="width: 32%; height: 45px;"/>
         <mu-raised-button　label="开始阅读" style="width: 32%; height: 50px;" primary/>
         <mu-flat-button @click="subscriberBook" label="自动订阅" style="width: 32%; height: 45px;"/>
-  </div>
-  <transition name="router-slid" mode="out-in">
-      <router-view></router-view>
-  </transition>
+    </div>
+
+    <transition name="router-slid" mode="out-in">
+        <router-view></router-view>
+    </transition>
   </div>
 
 </template>
@@ -186,7 +168,7 @@
     import {coverBaseUrl} from '@/config/env'
     import {mapState, mapActions} from 'vuex'
     import { Rate } from 'element-ui'
-    import {chaseBookRequest, subscriberBookRequest} from '../../../src/service/getAccountData'
+    import {chaseBookRequest, subscribeBookRequest} from '../../../src/service/getAccountData'
 
     Vue.use(Rate)
 
@@ -223,7 +205,6 @@
             'getBookInfoAction'
           ]),
         expandMore () {
-            console.log("点击");
             this.maxHeight = this.maxHeight != 'none' ? 'none' : '72px'
             this.visibility = this.visibility != 'hidden' ? 'hidden' : 'visible'
         },
@@ -249,7 +230,7 @@
             chaseBookRequest(this.book_id)
         },
         subscriberBook () {
-            subscriberBookRequest(this.book_id)
+            subscribeBookRequest(this.book_id)
         }
       }
     }

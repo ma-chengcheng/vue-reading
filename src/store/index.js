@@ -29,7 +29,8 @@ const state = {
         cover: '',
         describe: '',
         type: '',
-        update_state: ''
+        update_state: '',
+        book_comment: ''
     }
   },
   searchBook: []

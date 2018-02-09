@@ -4,9 +4,11 @@
 
         <mu-content-block class="content">
             <div class="grid-list">
-                <div class="grid" v-for="book_item in user_profile.chase_book">
-                    <img :src="coverBaseUrl + book_item.cover"/>
-                    <figcaption>{{book_item.book_name}}</figcaption>
+                <div class="grid" v-for="book_item, book_id in user_profile.chase_book">
+                    <router-link :to="'/book/' +  book_id">
+                        <img :src="coverBaseUrl + book_item.cover"/>
+                        <figcaption>{{book_item.book_name}}</figcaption>
+                    </router-link>
                 </div>
             </div>
           <p>{{chaseBookCount}}本最近阅读</p>

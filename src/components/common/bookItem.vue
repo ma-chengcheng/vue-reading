@@ -6,7 +6,7 @@
         <div class="book-info">
             <h4 class="book-name">{{book.book_name}}</h4>
             <div class="score">
-                3.2分
+                {{book.book_rank}}分
             </div>
             <p class="book-brief">
                 {{book.describe}}
@@ -19,7 +19,7 @@
                     </span>
                 </div>
                 <div class="book-mate-r">
-                    <span>{{book.type}}</span>
+                    <span>{{book.book_type}}</span>
                 </div>
             </div>
         </div>

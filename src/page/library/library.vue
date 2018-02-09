@@ -1,50 +1,47 @@
 <template>
-  <div>
-    <head-bar head_index='true' tab_value='library'></head-bar>
-    <mu-flexbox class="nav-bar">
-        <mu-flexbox-item v-for="navTitle in navTitles">
-            <div v-on:click="handleChange(navTitle.icon)" v-bind:class="[navTitle.icon==activeNav?'nav-bar-active':'']">
-                <i class="material-icons">{{navTitle.icon}}</i>
-                <span>
-                    {{navTitle.name}}
-                </span>
-            </div>
-        </mu-flexbox-item>
+    <div>
+        <head-bar head_index='true' tab_value='library'></head-bar>
 
-        <!-- 书籍筛选 -->
-        <mu-drawer right :open="open" :docked="docked" @close="toggle()" width="90%">
-            <h3 class="drawer-title">筛选</h3>
-          <div v-for="(tags, subject) in filterTags">
-            <h4 class="sub-title">{{subject}}</h4>
-            <mu-row>
-              <mu-col v-for="(tagState, tagName) in tags" width="25" tablet="25" desktop="25">
-                <div @click="selectFilter(subject, tagName)" v-bind:class="[tagState?'tag-selected':'tag-disselected']">
-                  {{tagName}}
+        <mu-flexbox class="nav-bar">
+            <!-- 顶部 -->
+            <mu-flexbox-item v-for="(nav, nav_key) in navs">
+                <div v-on:click="handleChange(nav_key)" v-bind:class="[nav_key==activeNav?'nav-bar-active':'']">
+                    <i class="material-icons">{{nav.icon}}</i>
+                    <span>{{nav.label}}</span>
                 </div>
-              </mu-col>
-            </mu-row>
-            <mu-divider/>
-          </div>
-          <div class="bottom-drawer">
-            <mu-flat-button backgroundColor="#f6f7f9" class="bottom-button" label="重置" @click="resetFilter"/>
-            <mu-raised-button class="bottom-button" label="完成" primary @click="finshSet"/>
-          </div>
-        </mu-drawer>
-    </mu-flexbox>
+            </mu-flexbox-item>
 
-    <mu-divider/>
+            <!-- 书籍筛选 -->
+            <mu-drawer right :open="open" :docked="docked" @close="open = !open" width="90%">
+                <h3 class="drawer-title">筛选</h3>
+                <div v-for="(sub, sub_key) in filterTags">
+                    <h4 class="sub-title">{{sub.sub_title}}</h4>
+                    <mu-row>
+                        <mu-col v-for="(tag, tag_key) in sub.content" width="25" tablet="25" desktop="25">
+                            <div @click="selectTag(sub_key, tag_key)" v-bind:class="[tag_key == selectedTags[sub_key]?'tag-selected':'tag-disselected']">
+                                {{tag.label}}
+                            </div>
+                        </mu-col>
+                    </mu-row>
+                    <mu-divider/>
+                </div>
+                <div class="bottom-drawer">
+                    <mu-flat-button backgroundColor="#f6f7f9" class="bottom-button" label="重置" @click="resetTag"/>
+                    <mu-raised-button class="bottom-button" label="完成" primary @click="open = false"/>
+                </div>
+            </mu-drawer>
+        </mu-flexbox>
 
-    <!-- 书籍列表 -->
-    <mu-list>
-         <mu-list-item　v-for="book_item in bookList" to="/book/">
-             <router-link :to="'/book/' +  book_item.id">
-                 <book-item :book="book_item"></book-item>
-             </router-link>
-        </mu-list-item>
-    </mu-list>
-    <mu-infinite-scroll :scroller="scroller" :loading="loading" @load="loadMore" loadingText="猫猫为您加载中"/>
+        <mu-divider/>
 
-  </div>
+        <!-- 书籍列表 -->
+        <mu-list>
+            <mu-list-item :to="'/book/' +  book_item.id"　v-for="book_item in bookList">
+                <book-item :book="book_item"></book-item>
+            </mu-list-item>
+        </mu-list>
+        <mu-infinite-scroll :scroller="scroller" :loading="loading" @load="loadMore" loadingText="猫猫为您加载中"/>
+    </div>
 </template>
 
 <script>
@@ -52,162 +49,162 @@ import headBar from '@/components/header/headBar'
 import bookItem from '@/components/common/bookItem'
 
 export default {
-  name: 'Library',
-  components: {
-    headBar,
-    bookItem,
-  },
-  data () {
-    const navTitles = [
-        {name: '人气', icon: 'favorite'},
-        {name: '时间', icon: 'restore'},
-        {name: '字数', icon: 'pie_chart'},
-        {name: '订阅', icon: 'turned_in'},
-        {name: '更多', icon: 'more_vert'},
-    ]
-
-    const filterTags = {
-      '类型': {'仙剑': false, '玄幻': false, '悬疑': false, '奇幻': false,
-              '军事': false, '历史': false, '竞技': false, '科幻': false,
-              '校园': false, '社会': false, '其它': false, '': null},
-      '属性': {'免费': false, 'VIP': false, '': null, '': null},
-      '状态': {'连载': false, '完结': false, '': null, '': null},
-      '更新时间': {'三日内': false, '七日内': false, '半月内': false, '一月内': false}
+    name: 'Library',
+    components: {
+        headBar,
+        bookItem,
+    },
+    data () {
+    // 顶部导航栏
+    const navs = {
+        favorite:
+            {label: '人气', icon: 'favorite'},
+        date:
+            {label: '时间', icon: 'restore'},
+        word_number:
+            {label: '字数', icon: 'pie_chart'},
+        subscribe:
+            {label: '订阅', icon: 'turned_in'},
+        more:
+            {label: '更多', icon: 'more_vert'}
     }
 
-    const selectedTags = {
-      '类型': ['type', 0],
-      '属性': ['bookState', 0],
-      '字数': ['wordNumber', 0],
-      '状态': ['bookState', 0],
-      '更新时间': ['updateTime', 0]
+
+    // 更多－过滤标签
+    const filterTags = {
+        book_type: {
+            sub_title: '类型',
+            content:
+                {
+                    0: {label: '仙剑'}, 1: {label: '玄幻'},
+                    2: {label: '悬疑'}, 3: {label: '奇幻'},
+                    4: {label: '军事'}, 5: {label: '历史'},
+                    6: {label: '竞技'}, 7: {label: '科幻'},
+                    8: {label: '校园'}, 9: {label: '社会'},
+                    10: {label: '其它'}
+                },
+        },
+        is_free: {
+            sub_title: '状态',
+            content:
+                {
+                    0: {label: '免费'}, 1: {label: 'VIP'}
+                }
+        },
+        update_state: {
+            sub_title: '类型',
+            content:
+                {
+                    0: {label: '连载'}, 1: {label: '完结'}
+                }
+        },
+        update_date: {
+            sub_title: '更新时间',
+            content:
+                {
+                    0: {label: '三日内'}, 1: {label: '七日内'},
+                    2: {label: '半月内'}, 3: {label: '一月内'}
+                }
+        }
     }
 
     return {
-      navTitles,
-      filterTags,
-      selectedTags,
+            navs,
+            activeNav: 'favorite',
 
-      activeNav: 'favorite',
+            filterTags,
 
-      bookList: [],
-      numPage: 1,
-      num: 10,
+            selectedTags: {
+                normal: 'favorite',
+                book_type: '',
+                is_free: '',
+                update_state: '',
+                update_date: ''
+            },
 
-      loading: false,
-      scroller: null,
 
-      open: false,
-      docked: true,
-      bottomNav: 'people',
-      bottomNavColor: 'people'
-    }
-  },
-  created () {
-    this.initData();
-  },
-  mounted () {
-    this.scroller = this.$el
-  },
-  methods: {
-    initData () {
-      this.getBookList()
-    },
-    handleChange (tag) {
-      switch (tag) {
-        case 'more_vert':
-          this.open = !this.open
-          this.docked = false
-          break;
-        default:
-          this.activeNav =tag;
-      }
-    },
-    toggle () {
-      this.open = !this.open
-    },
-    loadMore () {
-        this.loading = true
-        setTimeout(() => {
-        this.getBookList()
-        this.num += 10
-        this.loading = false
-        }, 1500)
-    },
-    getBookList () {
-      let bookList;
-      axios.get('/api/LibraryBookViewAPI/', {
-      params: {
-        numPage: this.numPage
+            bookList: [],
+            numPage: 1,
+            num: 10,
+
+            loading: false,
+            scroller: null,
+
+            open: false,
+            docked: true,
         }
-      })
-      .then(res => {
-          if (res.status === 200) {
-              this.numPage += 1;
-              bookList = res.data.book_items;
-              for (let i in bookList) {
-                  this.bookList.push(bookList[i])
-              }
+    },
+    mounted () {
+        this.init()
+        this.scroller = this.$el
+    },
+    methods: {
+        // 初始化
+        init () {
+            this.numPage = 1
+            this.bookList = []
+            localStorage.setItem('selectedTags', null)
+            // console.log(JSON.parse(localStorage.getItem('selectedTags')))
+            this.getBookList()
+        },
+        // 顶部导航栏
+        handleChange (navName) {
+            switch (navName) {
+                case 'more':
+                    this.open = !this.open
+                    this.docked = false
+                    break;
+                default:
+                    this.activeNav = navName
+                    this.selectedTags.normal = navName
+                    this.init()
           }
-        }
-      )
-    },
-    selectFilter(subject, tagName){
-
-      const getIndex = () => {
-          let index = 0, name;
-          for(let cur in this.filterTags[subject]){
-            index++;
-            if(tagName == cur){
-              return index;
+        },
+        // 加载更多
+        loadMore () {
+            this.loading = true
+            setTimeout(() => {
+                this.getBookList()
+                this.num += 10
+                this.loading = false
+            }, 1500)
+        },
+        // 获取书籍
+        getBookList () {
+            let bookList;
+            axios.get('/api/LibraryBookViewAPI/', {
+                params: {
+                        numPage: this.numPage,
+                        normal: this.selectedTags.normal,
+                        book_type: this.selectedTags.book_type,
+                        is_free: this.selectedTags.is_free,
+                        update_state:this.selectedTags.update_state,
+                        update_date: this.selectedTags.update_date
+                    }
+                })
+                .then(res => {
+                    if (res.status === 200) {
+                        this.numPage += 1;
+                        bookList = res.data.book_items;
+                        for (let i in bookList) {
+                            this.bookList.push(bookList[i])
+                        }
+                    }
+                }
+            )
+        },
+        // 选中标签
+        selectTag(sub, tag){
+            this.selectedTags[sub]  = (this.selectedTags[sub] == tag) ? '' : tag
+            this.init()
+        },
+        // 重置标签
+        resetTag(){
+            for (let key in this.selectedTags) {
+                this.selectedTags[key] = (key == 'normal') ? this.selectedTags[key] : ''
             }
-          }
         }
-
-      const getTagName = (index) => {
-          let i = 0, name;
-          for(let cur in this.filterTags[subject]){
-            i++;
-            if(index == i){
-              name = cur;
-              return name;
-            }
-          }
-        }
-
-      let  index = getIndex()
-
-      // 对非空项进行筛选
-      if (null != this.filterTags[subject][tagName]){
-          //  对已选择重复点击情况,取消选中
-          if (index == this.selectedTags[subject][1]) {
-            this.filterTags[subject][tagName] = false;
-            this.selectedTags[subject][1] = 0;
-          }else {
-              // 对未选择的情况,更换选择状态
-              // 若已选择的情况,清空之前的选择
-              if (0 != this.selectedTags[subject][1]) {
-                  this.filterTags[subject][getTagName(this.selectedTags[subject][1])] = false;
-              }
-              this.filterTags[subject][tagName] = true;
-              this.selectedTags[subject][1] = index;
-          }
-      }
-    },
-    resetFilter(){
-      for (let index in this.selectedTags) {
-        this.selectedTags[index][1] = 0;
-      }
-      for (var subject in this.filterTags) {
-        for (var tagName in this.filterTags[subject]) {
-          this.filterTags[subject][tagName] = false;
-        }
-      }
-    },
-    finshSet () {
-      this.toggle()
     }
-  }
 }
 </script>
 

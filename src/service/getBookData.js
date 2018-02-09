@@ -28,3 +28,12 @@ export const searchBook = (key_value) => axios.get('/api/SearchBookAPIView/',{
     key_value
     }
 })
+
+/**
+* 书籍目录
+**/
+export const getBookCatalog = (book_id) => axios.get('/api/BookCatalogAPIView/',{
+    params: {
+        book_id
+    }
+})

@@ -1,23 +1,24 @@
 <template>
     <div>
         <mu-list>
-        　<mu-divider/>
-          <h3 class="sub_title">{{module_title}}</h3>
-          <mu-list-item :to="'/book/' +  module_data.top_book.id" style="position: relative;">
-              <book-item :book="module_data.top_book"></book-item>
-          </mu-list-item>
-          <!-- 板块书籍列表 -->
+            <mu-divider/>
+            <h3 class="sub_title">{{module_title}}</h3>
+
+            <!-- 顶部书籍 -->
+            <mu-list-item :to="'/book/' +  module_data.top_book.id">
+                <book-item :book="module_data.top_book"></book-item>
+            </mu-list-item>
+
+            <!-- 板块书籍列表 -->
             <mu-list-item v-for="book_item in module_data.book_items" :to="'/book/' + book_item.id">
-              <div class="tag">
-                  {{book_item.type}}
-              </div>
-              <div class="item">
-                  {{book_item.book_name}}
-                  <span class="item-author">{{book_item.author}}</span>
-              </div>
-              <div class="score">
-                  3.2分
-              </div>
+                <div class="tag">{{book_item.book_type}}</div>
+                <div class="item">
+                    {{book_item.book_name}}
+                    <span class="item-author">{{book_item.author}}</span>
+                </div>
+                <div class="score">
+                    {{book_item.book_rank}}分
+                </div>
             </mu-list-item>
         </mu-list>
     </div>
@@ -33,7 +34,6 @@ export default {
     },
     props: ['module_title', 'module_name', 'module_data'],
     data(){
-
         return {
             coverBaseUrl
         }

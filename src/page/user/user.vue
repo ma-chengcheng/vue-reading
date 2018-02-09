@@ -42,11 +42,11 @@
                     <i slot="right" class="material-icons">chevron_right</i>
                 </mu-list-item>
                 <mu-divider/>
-                <mu-list-item title="我的追书" to="/user/bookFollow">
+                <mu-list-item title="我的追书" to="/user/bookHistory">
                     <i slot="right" class="material-icons">chevron_right</i>
                 </mu-list-item>
                 <mu-divider/>
-                <mu-list-item title="最近阅读" to="/user/bookHistory">
+                <mu-list-item title="我的订阅" to="/user/bookFollow">
                     <i slot="right" class="material-icons">chevron_right</i>
                 </mu-list-item>
             </mu-card>
@@ -59,7 +59,7 @@
         </div>
 
         <mu-raised-button @click="logout" label="退出登录" fullWidth primary/>
-        
+
          <transition name="r-router-slid" mode="out-in">
              <router-view></router-view>
          </transition>

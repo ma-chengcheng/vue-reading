@@ -2,17 +2,11 @@
     <div class="page">
         <head-bar head_bar='true' :head_title="head_title"></head-bar>
         <mu-list>
-            <mu-list-item>
-                第一章 狄仁杰初探幽州地
+            <mu-list-item :title="'共' + chapter_num + '章'" @click="reverse">
+                <mu-icon slot="right" value="swap_vert"/>
             </mu-list-item>
-            <mu-list-item>
-                第二章 探奇案狄公重出山
-            </mu-list-item>
-            <mu-list-item>
-                第三章 使团喋血记 第一章 突厥客喋血甘南道
-            </mu-list-item>
-            <mu-list-item>
-                第四章 金木兰洞中女皇梦
+            <mu-list-item v-for="book_chapter in book_chapters">
+                {{book_chapter.chapter}}
             </mu-list-item>
         </mu-list>
     </div>
@@ -20,13 +14,32 @@
 
 <script>
 import headBar from '@/components/header/headBar'
+import {getBookCatalog} from '../../../../src/service/getBookData'
+
 export default{
     components: {
         headBar
     },
     data(){
         return{
-            head_title: '修仙神探'
+            book_chapters: [],
+            chapter_num: 0,
+            head_title: ''
+        }
+    },
+    mounted() {
+        this.init()
+    },
+    methods: {
+        init(){
+            let book_id = this.$route.params.book_id;
+            const bookCatalog = getBookCatalog(book_id).then(res => {
+                this.book_chapters = res.data.catalog_items
+                this.chapter_num = this.book_chapters.length
+            })
+        },
+        reverse(){
+            this.book_chapters.reverse();
         }
     }
 }
